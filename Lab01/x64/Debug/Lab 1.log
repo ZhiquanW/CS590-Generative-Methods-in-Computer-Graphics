@@ -1,4 +1,11 @@
 ﻿  main.cpp
-C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(217,17): warning C4305:  'argument': truncation from 'double' to 'const float'
+C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(221,17): warning C4305:  'argument': truncation from 'double' to 'const float'
+C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(232,38): warning C4305:  'initializing': truncation from 'double' to 'float'
+C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(240,19): warning C4305:  'argument': truncation from 'double' to 'const float'
+C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(246,17): warning C4305:  'argument': truncation from 'double' to 'const float'
+C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(247,54): warning C4305:  'argument': truncation from 'double' to 'float'
+C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(252,54): warning C4305:  'argument': truncation from 'double' to 'float'
+C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(265,17): warning C4305:  'argument': truncation from 'double' to 'const float'
+C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(272,54): warning C4305:  'argument': truncation from 'double' to 'float'
 C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(142): warning C4715:  'P': not all control paths return a value
   Lab 1.vcxproj -> C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\x64\Debug\Lab 1.exe
