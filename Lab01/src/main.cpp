@@ -52,7 +52,9 @@ GLint hWindow = 800;
 bool tangentsFlag = false;
 bool pointsFlag = false;
 bool curveFlag = true;
-bool frenetFlag = false; 
+bool frenetFlag = false;
+bool osculatingFlag = false;
+int osculatingID = 0;
     // user define curve id
 int curve_id = 1;
 /*********************************
@@ -96,6 +98,18 @@ void DrawLine(Vect3d a, Vect3d b, Vect3d color) {
   glEnd();
 }
 
+void DrawCircle(Vect3d c, Vect3d N,Vect3d B,float r, Vect3d color) {
+  int n = 1000;
+  float interval = 360.0f / (float)n;
+  Vect3d original = c - N.GetRotatedAxis(0, N).GetNormalized()*r;
+  Vect3d next;
+  for (int i = 0; i < n; ++i) {
+    next = c - N.GetRotatedAxis(interval*(float)i, B).GetNormalized()*r;
+    DrawLine(original,next ,color);
+    original = next;
+  }
+}
+
 // draws point at a with color
 void DrawPoint(Vect3d a, Vect3d color) {
   glColor3fv(color);
@@ -116,29 +130,27 @@ inline Vect3d P(GLfloat t) {
     const float height = 1.f;
     const float rot = 5.0f;
     // spiral with radius rad, height, and rotations rot
-    return Vect3d(rad * (float)sin(rot * M_PI * t), 
-				  height * t,
+    return Vect3d(rad * (float)sin(rot * M_PI * t), height * t,
                   rad * (float)cos(rot * M_PI * t));
   } else if (curve_id == 2) {
     const float control = 10.0f;
     const float height = 1.f;
     const float rad = 0.05f;
     return Vect3d(
-        rad* 16 * sin(control * t) * sin(control * t) * sin(control * t),
-                  height * t,
-        rad*(13 * cos(control * t) - 5 * cos(control * 2 * t) -
-                      2 * cos(control * 3 * t) - cos(control * 4 * t)));
-  
+        rad * 16 * sin(control * t) * sin(control * t) * sin(control * t),
+        height * t,
+        rad * (13 * cos(control * t) - 5 * cos(control * 2 * t) -
+               2 * cos(control * 3 * t) - cos(control * 4 * t)));
+
   } else if (curve_id == 3) {
     const float control = 10.0f;
     const float height = 1.f;
     const float rad = 0.05f;
     return Vect3d(
-        rad * 16 * sin(control * t) * sin(control * t) * sin(control * t),
+        rad /((t+1)*2)* 16 * sin(control * t) * sin(control * t) * sin(control * t),
         height * t,
-        rad * 16 * cos(control * t) * cos(control * t) * cos(control * t));
+        rad /((t+1)*2)* 16 * cos(control * t) * cos(control * t) * cos(control * t));
   }
-  
 }
 
 // This fills the <vector> *a with data.
@@ -199,20 +211,17 @@ void Lab01() {
       DrawLine(v[i], v[i + 1], almostBlack);
     }
   }
-    
+
   // draw the points
   if (pointsFlag) {
     for (unsigned int i = 0; i < v.size() - 1; i++) {
       DrawPoint(v[i], blue);
     }
   }
-    
+
   // draw the tangents
   if (tangentsFlag) {
     for (unsigned int i = 0; i < v.size() - 1; i++) {
-      const float rad = 0.2f;
-      const float height = 1.f;
-      const float rot = 5.0f;
       Vect3d tan;
       tan =
           v[i + 1] -
@@ -222,64 +231,102 @@ void Lab01() {
       DrawLine(v[i], v[i] + tan, red);
     }
   }
-    
 
   if (frenetFlag) {
-    if (curve_id == 1) {
-      const float rad = 0.2f;
-      const float height = 1.f;
-      const float rot = 5.0f;
-      const float tmpRPI = rot * M_PI;
-      const float tmpRRPI = tmpRPI * tmpRPI;
-      for (unsigned int i = 0; i < v.size() - 1; ++i) {
-        float t = 1.0f / v.size() * i;
-        // draw T
-        Vect3d tan(rad * tmpRPI * cos(tmpRPI * t), height,
-                   -rad * tmpRPI * sin(tmpRPI * t));
-        tan.Normalize();
-        tan *= 0.2;
-        DrawLine(v[i], v[i] + tan, red);
-        // draw N
-        Vect3d N(-rad * tmpRRPI * sin(tmpRPI * t), 0,
-                 -rad * tmpRRPI * cos(tmpRPI * t));
-        N.Normalize();
-        N *= 0.2;
-        DrawLine(v[i], v[i] + N, Vect3d(0.2, 0.3, 0.7));
-        // draw B
-        Vect3d B = tan.Cross(N);
-        B.Normalize();
-        B *= 0.2f;
-        DrawLine(v[i], v[i] + B, Vect3d(0.5, 0.3, 0.4));
-      }
-
-    } else if (curve_id == 2) {
-      const float control = 10.0f;
-      const float height = 1.f;
-      for (unsigned int i = 0; i < v.size() - 1; i++) {
-        const float rad = 0.05f;
-        float t = 1.0f / v.size() * i;
-		//Draw T
-        Vect3d T(rad * 48 * control * sin(control * t) * sin(control * t) *
-                     cos(control * t),
-                 height, rad * (-13 * control * sin(control * t)));
-        T.Normalize();
-        T *= 0.2;
-        DrawLine(v[i], v[i] + T, red);
-		//Draw N
-        Vect3d N(96.0f * rad * control * control * cos(control*t),0,rad*(-13*control*control*2*cos(control*t)-20*control*control*cos(2*control*t)+18*control*control*cos(control
-		*3*t)+16*control*control*cos(control*4*t)));
-        N.Normalize();
-        N *= 0.2f;
-        DrawLine(v[i], v[i] + N, Vect3d(0.2, 0.3, 0.7));
-       /* Vec3td N()
-			return Vect3d(
-            rad * 16 * sin(control * t) * sin(control * t) * sin(control * t),
-            height * t,
-            rad * (13 * cos(control * t) - 5 * cos(control * 2 * t) -
-                   2 * cos(control * 3 * t) - cos(control * 4 * t)));*/
-      }
+    vector<Vect3d> T_vector;
+    vector<Vect3d> N_vector;
+    vector<Vect3d> B_vector;
+	// draw T
+    for ( int i = 0; i < v.size(); i++) {
+      Vect3d T;
+      int after_id = i + 1 >= v.size() ? v.size() - 1 : i + 1;
+      int previous_id = i - 1 < 0 ? 0 : i - 1;
+      T = (v[after_id] - v[previous_id]).GetNormalized() * 0.2f;
+      T_vector.push_back(T);
+      DrawLine(v[i], v[i] + T, red);
     }
-  
+	//draw N
+    for (int i = 0; i < v.size(); ++i) {
+      Vect3d N;
+      int after_id = i + 1 >= v.size() ? v.size() - 1 : i + 1;
+      int previous_id = i - 1 < 0 ? 0 : i - 1;
+      N = (T_vector[after_id] - T_vector[previous_id]).GetNormalized() * 0.2f;
+      N_vector.push_back(N);
+    }
+	//draw B
+    for (int i = 0; i < v.size(); ++i) {
+      Vect3d B = T_vector[i].Cross(N_vector[i]).GetNormalized() * 0.2f;
+      DrawLine(v[i], v[i] + B, green);
+      Vect3d N = B.Cross(T_vector[i]).GetNormalized() * 0.2f;
+      N_vector[i] = N;
+      DrawLine(v[i], v[i] + N, blue);
+      B_vector.push_back(B);
+
+    }
+    if (osculatingFlag) {
+      float k = T_vector[osculatingID].Cross(N_vector[osculatingID]).Length() /
+                pow((T_vector[osculatingID].Length()),3);
+      float r = 1.0f / k;
+      //std::cout << r << std::endl;
+      //Vect3d a = B_vector[osculatingID].GetNormalized();
+      DrawCircle(v[osculatingID] + N_vector[osculatingID].GetNormalized() * r,
+                 N_vector[osculatingID], B_vector[osculatingID],r, red);
+	}
+    //  if (curve_id == 1) {
+    //    const float rad = 0.2f;
+    //    const float height = 1.f;
+    //    const float rot = 5.0f;
+    //    const float tmpRPI = rot * M_PI;
+    //    const float tmpRRPI = tmpRPI * tmpRPI;
+    //    for (unsigned int i = 0; i < v.size() - 1; ++i) {
+    //      float t = 1.0f / v.size() * i;
+    //      // draw T
+    //      Vect3d tan(rad * tmpRPI * cos(tmpRPI * t), height,
+    //                 -rad * tmpRPI * sin(tmpRPI * t));
+    //      tan.Normalize();
+    //      tan *= 0.2;
+    //      DrawLine(v[i], v[i] + tan, red);
+    //      // draw N
+    //      Vect3d N(-rad * tmpRRPI * sin(tmpRPI * t), 0,
+    //               -rad * tmpRRPI * cos(tmpRPI * t));
+    //      N.Normalize();
+    //      N *= 0.2;
+    //      DrawLine(v[i], v[i] + N, Vect3d(0.2, 0.3, 0.7));
+    //      // draw B
+    //      Vect3d B = tan.Cross(N);
+    //      B.Normalize();
+    //      B *= 0.2f;
+    //      DrawLine(v[i], v[i] + B, Vect3d(0.5, 0.3, 0.4));
+    //    }
+
+    //  } else if (curve_id == 2) {
+    //    const float control = 10.0f;
+    //    const float height = 1.f;
+    //    for (unsigned int i = 0; i < v.size() - 1; i++) {
+    //      const float rad = 0.05f;
+    //      float t = 1.0f / v.size() * i;
+    ////Draw T
+    //      Vect3d T(rad * 48 * control * sin(control * t) * sin(control * t) *
+    //                   cos(control * t),
+    //               height, rad * (-13 * control * sin(control * t)));
+    //      T.Normalize();
+    //      T *= 0.2;
+    //      DrawLine(v[i], v[i] + T, red);
+    ////Draw N
+    //      Vect3d N(96.0f * rad * control * control *
+    //      cos(control*t),0,rad*(-13*control*control*2*cos(control*t)-20*control*control*cos(2*control*t)+18*control*control*cos(control
+    //*3*t)+16*control*control*cos(control*4*t)));
+    //      N.Normalize();
+    //      N *= 0.2f;
+    //      DrawLine(v[i], v[i] + N, Vect3d(0.2, 0.3, 0.7));
+    //     /* Vec3td N()
+    //	return Vect3d(
+    //          rad * 16 * sin(control * t) * sin(control * t) * sin(control *
+    //          t), height * t, rad * (13 * cos(control * t) - 5 * cos(control *
+    //          2 * t) -
+    //                 2 * cos(control * 3 * t) - cos(control * 4 * t)));*/
+    //    }
+    //  }
   }
 }
 
@@ -324,6 +371,21 @@ void Kbd(unsigned char a, int x, int y)  // keyboard callback
       break;
     case 'f':
       frenetFlag = !frenetFlag;
+      break;
+    case 'o':
+      osculatingFlag = !osculatingFlag;
+      break;
+    case '>':
+      if (osculatingID == v.size() - 1) {
+        break;
+      }
+      osculatingID += 1;
+      break;
+    case '<':
+      if (osculatingID == 0) {
+        break;
+	  }
+      osculatingID -= 1;
       break;
     case 32: {
       if (angleIncrement == 0)
