@@ -71,6 +71,10 @@
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Users\wang4490\Documents\CS590-Generative-Methods-in-Computer-Graphics\Lab02\Lab02\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\wang4490\Documents\CS590-Generative-Methods-in-Computer-Graphics\Lab02\Lab02\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
