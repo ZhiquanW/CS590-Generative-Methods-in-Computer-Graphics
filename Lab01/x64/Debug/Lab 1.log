@@ -1,1 +1,8 @@
-﻿
+﻿  main.cpp
+C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(211,60): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(218,60): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+  vect3d.cpp
+  Generating Code...
+C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(252,17): warning C4305:  'argument': truncation from 'double' to 'const float'
+C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\src\main.cpp(154): warning C4715:  'P': not all control paths return a value
+  Lab 1.vcxproj -> C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab01\x64\Debug\Lab 1.exe

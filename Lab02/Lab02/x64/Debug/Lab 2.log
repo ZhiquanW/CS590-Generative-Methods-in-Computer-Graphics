@@ -1,0 +1,5 @@
+﻿  main.cpp
+  vect3d.cpp
+  Generating Code...
+C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab02\Lab02\src\main.cpp(199,13): warning C4305:  'argument': truncation from 'double' to 'const float'
+  Lab 2.vcxproj -> C:\Users\wzqzh\Documents\Git-Repository\CS590-Generative-Methods-in-Computer-Graphics\Lab02\Lab02\x64\Debug\Lab 2.exe
