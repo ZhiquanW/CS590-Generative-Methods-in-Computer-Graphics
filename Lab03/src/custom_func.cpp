@@ -1,0 +1,142 @@
+//
+// @Author: Zhiquan Wang 
+// @Date: 2/16/20.
+// @Email: zhiquan.wzq@gmail.com
+// Copyright (c) 2020 Zhiquan Wang. All rights reserved.
+//
+#include "ZWEngine.h"
+
+//#define STB_IMAGE_IMPLEMENTATION
+//
+//#include "stb_image.h"
+static ZWEngine *self;
+
+// Opengl functions
+void ZWEngine::set_render_info() {
+    // Set Render
+    self = this;
+    /* Customize */
+    /*=========================== Enable OpenGL Features ===========================*/
+    glEnable(GL_DEPTH_TEST);
+    /*=========================== Setup Window Interactions ===========================*/
+    glfwSetFramebufferSizeCallback(this->window, framebuffer_size_callback);
+    /*=========================== Setup Shader Program ===========================*/
+    shader_program->use_shader_program();
+    /*=========================== Setup Camera ===========================*/
+    Camera main_cam;
+    main_camera.set_pos(glm::vec3(0, 2, 6));
+    this->attach_camera(main_camera);
+    /*=========================== Add Objects ===========================*/
+    this->my_tree.add_node(0,up,Node(glm::vec3(0,1,0)));
+    this->my_tree.add_node(1,right,Node(glm::vec3(0.25,1.4,0.4)));
+    this->my_tree.add_node(1,up,Node(glm::vec3(-0.25,1.9,0.0)));
+    this->my_tree.add_node(1,up,Node(glm::vec3(0.25,1.6,-0.4)));
+    this->my_tree.add_node(4,up,Node(glm::vec3(0.3,1.8,-0.5)));
+    std::vector<glm::vec3> nodes_pos = this->my_tree.generate_points();
+    std::vector<GLuint> connections = this->my_tree.generate_connections();
+    tree_segment_num_2x = connections.size();
+    VertexArrayObject vao(true);
+    VertexBufferObject vbo(nodes_pos, GL_STATIC_DRAW);
+    ElementBufferObject ebo(connections, GL_STATIC_DRAW);
+    //pos
+    bind_vertex_attribute(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *) nullptr);
+    vao.attach_vbo(vbo.id());
+    vao.attach_ebo(ebo.id());
+    this->add_vao("tree_nodes", vao);
+    ZWEngine::disable_vao();
+
+}
+
+void ZWEngine::render_ui() {
+    // feed inputs to dear imgui, start new frame
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+    // Create a window called "Hello, world!" and append into it.
+    ImGui::Begin("Hello, world!");
+    if (this->uniform_failed_id != -1) {
+        std::string tmp = "uniform variable ";
+        tmp += std::to_string(uniform_failed_id);
+        tmp += " declare failed";
+        ImGui::Text("%s", tmp.c_str());
+    }
+
+    ImGui::SliderFloat("obj angle: ", &obj_angle, -180.0f, 180.0f);
+    ImGui::SliderFloat2("camera angle", &this->main_camera.get_pitch_yaw()[0], -180, 180);
+    ImGui::End();
+    ImGui::Render();
+}
+
+void ZWEngine::render_world() {
+    // clear buffers
+    glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glm::mat4 model = glm::rotate(glm::radians(this->obj_angle), glm::vec3(0.0f, 1.0f, 0.0f));
+    if (!shader_program->set_uniform_mat4fv(2, model)) {
+        this->uniform_failed_id = 2;
+    }
+    glm::mat4 view = this->main_camera.get_view_mat();
+    if (!shader_program->set_uniform_mat4fv(3, view)) {
+        this->uniform_failed_id = 3;
+    }
+    glm::mat4 proj = this->main_camera.get_projection_mat();
+    if (!shader_program->set_uniform_mat4fv(4, proj)) {
+        this->uniform_failed_id = 4;
+    }
+    this->activate_vao("tree_nodes");
+    glDrawElements(GL_LINES,tree_segment_num_2x , GL_UNSIGNED_INT, 0);
+    ZWEngine::disable_vao();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void ZWEngine::process_input() {
+    // check 'ESC' is pressed
+    if (glfwGetKey(this->window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(this->window, true);
+    }
+}
+
+
+void framebuffer_size_callback(GLFWwindow *window, int w, int h) {
+    glViewport(0, 0, w, h);
+    self->get_camera().set_aspect((GLfloat) w / (GLfloat) h);
+}
+
+bool first_in = true;
+glm::vec2 pre_mouse_pos;
+// callback function
+
+
+void ZWEngine::keycode_callback(GLFWwindow *window, int key, int scancode, int action, int mode) {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, true);
+    }
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        self->main_camera.process_keyboard(FORWARD, self->delta_time);
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        self->main_camera.process_keyboard(BACKWARD, self->delta_time);
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        self->main_camera.process_keyboard(LEFT, self->delta_time);
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        self->main_camera.process_keyboard(RIGHT, self->delta_time);
+}
+
+void ZWEngine::mouse_callback(GLFWwindow *window, double xpos, double ypos) {
+    if (first_in) {
+        pre_mouse_pos = glm::vec2(xpos, ypos);
+        first_in = false;
+    }
+    glm::vec2 offset(xpos - pre_mouse_pos.x, pre_mouse_pos.y - ypos);
+    pre_mouse_pos = glm::vec2(xpos, ypos);
+    self->main_camera.process_mouse_movement(offset);
+}
+
+void ZWEngine::scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
+    self->main_camera.process_mouse_scroll(yoffset);
+}
+
+
+
+
+

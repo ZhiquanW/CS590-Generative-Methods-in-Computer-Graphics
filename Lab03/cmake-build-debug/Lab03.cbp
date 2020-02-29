@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Lab03"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Lab03">
+				<Option output="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Lab03" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 Lab03"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Lab03/fast">
+				<Option output="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Lab03" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 Lab03/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/imgui/imgui.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/imgui/imgui_demo.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/imgui/imgui_draw.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/imgui/imgui_impl_glfw.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/imgui/imgui_impl_opengl3.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/imgui/imgui_widgets.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Camera.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/ElementBufferObject.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Mesh.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Node.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/ShaderProgram.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Texture.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Tree.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/VertexArrayObject.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/VertexBufferObject.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/ZWEngine.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/custom_func.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/glad.c">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/main.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/stb_image.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
