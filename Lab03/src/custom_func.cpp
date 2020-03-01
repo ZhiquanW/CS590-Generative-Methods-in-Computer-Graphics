@@ -24,9 +24,10 @@ void ZWEngine::set_render_info() {
     shader_program->use_shader_program();
     /*=========================== Setup Camera ===========================*/
     Camera main_cam;
-    main_camera.set_pos(glm::vec3(0, 2, 6));
+    main_camera.set_pos(glm::vec3(0, 3, 4));
     this->attach_camera(main_camera);
     /*=========================== Add Objects ===========================*/
+    // init tree nodes
     this->my_tree.add_node(0,up,Node(glm::vec3(0,1,0)));
     this->my_tree.add_node(1,right,Node(glm::vec3(0.25,1.4,0.4)));
     this->my_tree.add_node(1,up,Node(glm::vec3(-0.25,1.9,0.0)));
@@ -35,14 +36,28 @@ void ZWEngine::set_render_info() {
     std::vector<glm::vec3> nodes_pos = this->my_tree.generate_points();
     std::vector<GLuint> connections = this->my_tree.generate_connections();
     tree_segment_num_2x = connections.size();
-    VertexArrayObject vao(true);
-    VertexBufferObject vbo(nodes_pos, GL_STATIC_DRAW);
-    ElementBufferObject ebo(connections, GL_STATIC_DRAW);
+    VertexArrayObject nodes_vao(true);
+    VertexBufferObject nodes_vbo(nodes_pos, GL_STATIC_DRAW);
+    ElementBufferObject nodes_ebo(connections, GL_STATIC_DRAW);
     //pos
     bind_vertex_attribute(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *) nullptr);
-    vao.attach_vbo(vbo.id());
-    vao.attach_ebo(ebo.id());
-    this->add_vao("tree_nodes", vao);
+    nodes_vao.attach_vbo(nodes_vbo.id());
+    nodes_vao.attach_ebo(nodes_ebo.id());
+    this->add_vao("tree_nodes", nodes_vao);
+    ZWEngine::disable_vao();
+    // init tree surfaces
+    my_tree.generate_surfaces();
+    std::vector<glm::vec3> position_list = this->my_tree.get_point_pos();
+    std::vector<GLuint> idx= this->my_tree.get_surface_idx();
+    VertexArrayObject surfaces_vao(true);
+    VertexBufferObject surfaces_vbo(position_list,GL_STATIC_DRAW);
+    ElementBufferObject surfaces_ebo(idx,GL_STATIC_DRAW);
+    //pos
+    bind_vertex_attribute(1,3,GL_FLOAT,GL_FALSE,3*sizeof(GLfloat),(void *) nullptr);
+    surfaces_vao.attach_vbo(surfaces_vbo.id());
+    surfaces_vao.attach_ebo(surfaces_ebo.id());
+    surfaces_vao.set_elements_num(idx.size());
+    this->add_vao("surfaces",surfaces_vao);
     ZWEngine::disable_vao();
 
 }
@@ -84,8 +99,15 @@ void ZWEngine::render_world() {
     if (!shader_program->set_uniform_mat4fv(4, proj)) {
         this->uniform_failed_id = 4;
     }
-    this->activate_vao("tree_nodes");
-    glDrawElements(GL_LINES,tree_segment_num_2x , GL_UNSIGNED_INT, 0);
+//    this->activate_vao("tree_nodes");
+//    glDrawElements(GL_LINES,tree_segment_num_2x , GL_UNSIGNED_INT, 0);
+//    ZWEngine::disable_vao();
+    this->activate_vao("surfaces");
+    int a = this->vao_map["surfaces"].get_elements_num();
+    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+    glDrawElements(GL_TRIANGLES,a,GL_UNSIGNED_INT,0);
+    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+
     ZWEngine::disable_vao();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
@@ -135,6 +157,7 @@ void ZWEngine::mouse_callback(GLFWwindow *window, double xpos, double ypos) {
 void ZWEngine::scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
     self->main_camera.process_mouse_scroll(yoffset);
 }
+
 
 
 

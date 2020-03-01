@@ -18,6 +18,7 @@
 //
 
 #include <GLFW/glfw3.h>
+#include <GL/gl.h>
 
 #define GLM_ENABLE_EXPERIMENTAL
 
@@ -88,7 +89,7 @@ private:
     void add_vao(const std::string &, VertexArrayObject &);
 
     void activate_vao(const std::string &);
-
+    VertexArrayObject get_vao(const std::string &);
     static void disable_vao();
 
     void add_texture(Texture);
@@ -104,8 +105,7 @@ private:
 
 void bind_vertex_buffer_object(const std::vector<GLfloat> &data, GLenum data_type = GL_STATIC_DRAW);
 
-void
-bind_vertex_attribute(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer);
+void bind_vertex_attribute(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer);
 
 void framebuffer_size_callback(GLFWwindow *window, int w, int h);
 

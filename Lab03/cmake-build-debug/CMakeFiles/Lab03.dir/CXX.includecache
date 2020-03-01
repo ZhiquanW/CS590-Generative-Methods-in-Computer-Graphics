@@ -42,6 +42,12 @@ map
 vector
 -
 
+../include/Point.h
+glad/glad.h
+-
+glm/glm.hpp
+-
+
 ../include/ShaderProgram.h
 glad/glad.h
 -
@@ -54,6 +60,14 @@ glm/detail/type_mat.hpp
 glm/gtc/type_ptr.hpp
 -
 
+../include/Surface.h
+vector
+-
+glad/glad.h
+-
+glm/gtx/transform.hpp
+-
+
 ../include/Texture.h
 glad/glad.h
 -
@@ -63,6 +77,10 @@ string
 ../include/Tree.h
 Node.h
 ../include/Node.h
+Surface.h
+../include/Surface.h
+Point.h
+../include/Point.h
 
 ../include/VertexArrayObject.h
 glad/glad.h
@@ -92,6 +110,8 @@ imgui_impl_glfw.h
 imgui_impl_opengl3.h
 ../include/imgui_impl_opengl3.h
 GLFW/glfw3.h
+-
+GL/gl.h
 -
 glm/gtx/transform.hpp
 -
@@ -143,6 +163,10 @@ imgui_user.h
 ../include/imgui_impl_glfw.h
 
 ../include/imgui_impl_opengl3.h
+
+/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Tree.cpp
+Tree.h
+/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Tree.h
 
 /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/custom_func.cpp
 ZWEngine.h

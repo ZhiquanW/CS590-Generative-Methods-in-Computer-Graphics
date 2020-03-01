@@ -116,7 +116,13 @@
 		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Node.cpp">
 			<Option target="Lab03"/>
 		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Point.cpp">
+			<Option target="Lab03"/>
+		</Unit>
 		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/ShaderProgram.cpp">
+			<Option target="Lab03"/>
+		</Unit>
+		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Surface.cpp">
 			<Option target="Lab03"/>
 		</Unit>
 		<Unit filename="/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Texture.cpp">

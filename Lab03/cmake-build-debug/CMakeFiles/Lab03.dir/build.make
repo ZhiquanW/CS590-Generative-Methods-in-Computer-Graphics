@@ -187,9 +187,22 @@ CMakeFiles/Lab03.dir/src/Node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab03.dir/src/Node.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Node.cpp -o CMakeFiles/Lab03.dir/src/Node.cpp.s
 
+CMakeFiles/Lab03.dir/src/Point.cpp.o: CMakeFiles/Lab03.dir/flags.make
+CMakeFiles/Lab03.dir/src/Point.cpp.o: ../src/Point.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Lab03.dir/src/Point.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Lab03.dir/src/Point.cpp.o -c /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Point.cpp
+
+CMakeFiles/Lab03.dir/src/Point.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab03.dir/src/Point.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Point.cpp > CMakeFiles/Lab03.dir/src/Point.cpp.i
+
+CMakeFiles/Lab03.dir/src/Point.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab03.dir/src/Point.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Point.cpp -o CMakeFiles/Lab03.dir/src/Point.cpp.s
+
 CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.o: CMakeFiles/Lab03.dir/flags.make
 CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.o: ../src/ShaderProgram.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.o -c /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/ShaderProgram.cpp
 
 CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.i: cmake_force
@@ -200,9 +213,22 @@ CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/ShaderProgram.cpp -o CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.s
 
+CMakeFiles/Lab03.dir/src/Surface.cpp.o: CMakeFiles/Lab03.dir/flags.make
+CMakeFiles/Lab03.dir/src/Surface.cpp.o: ../src/Surface.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Lab03.dir/src/Surface.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Lab03.dir/src/Surface.cpp.o -c /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Surface.cpp
+
+CMakeFiles/Lab03.dir/src/Surface.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Lab03.dir/src/Surface.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Surface.cpp > CMakeFiles/Lab03.dir/src/Surface.cpp.i
+
+CMakeFiles/Lab03.dir/src/Surface.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Lab03.dir/src/Surface.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Surface.cpp -o CMakeFiles/Lab03.dir/src/Surface.cpp.s
+
 CMakeFiles/Lab03.dir/src/Texture.cpp.o: CMakeFiles/Lab03.dir/flags.make
 CMakeFiles/Lab03.dir/src/Texture.cpp.o: ../src/Texture.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Lab03.dir/src/Texture.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Lab03.dir/src/Texture.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Lab03.dir/src/Texture.cpp.o -c /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Texture.cpp
 
 CMakeFiles/Lab03.dir/src/Texture.cpp.i: cmake_force
@@ -215,7 +241,7 @@ CMakeFiles/Lab03.dir/src/Texture.cpp.s: cmake_force
 
 CMakeFiles/Lab03.dir/src/Tree.cpp.o: CMakeFiles/Lab03.dir/flags.make
 CMakeFiles/Lab03.dir/src/Tree.cpp.o: ../src/Tree.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Lab03.dir/src/Tree.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Lab03.dir/src/Tree.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Lab03.dir/src/Tree.cpp.o -c /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/Tree.cpp
 
 CMakeFiles/Lab03.dir/src/Tree.cpp.i: cmake_force
@@ -228,7 +254,7 @@ CMakeFiles/Lab03.dir/src/Tree.cpp.s: cmake_force
 
 CMakeFiles/Lab03.dir/src/VertexArrayObject.cpp.o: CMakeFiles/Lab03.dir/flags.make
 CMakeFiles/Lab03.dir/src/VertexArrayObject.cpp.o: ../src/VertexArrayObject.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Lab03.dir/src/VertexArrayObject.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Lab03.dir/src/VertexArrayObject.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Lab03.dir/src/VertexArrayObject.cpp.o -c /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/VertexArrayObject.cpp
 
 CMakeFiles/Lab03.dir/src/VertexArrayObject.cpp.i: cmake_force
@@ -241,7 +267,7 @@ CMakeFiles/Lab03.dir/src/VertexArrayObject.cpp.s: cmake_force
 
 CMakeFiles/Lab03.dir/src/VertexBufferObject.cpp.o: CMakeFiles/Lab03.dir/flags.make
 CMakeFiles/Lab03.dir/src/VertexBufferObject.cpp.o: ../src/VertexBufferObject.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Lab03.dir/src/VertexBufferObject.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/Lab03.dir/src/VertexBufferObject.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Lab03.dir/src/VertexBufferObject.cpp.o -c /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/VertexBufferObject.cpp
 
 CMakeFiles/Lab03.dir/src/VertexBufferObject.cpp.i: cmake_force
@@ -254,7 +280,7 @@ CMakeFiles/Lab03.dir/src/VertexBufferObject.cpp.s: cmake_force
 
 CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o: CMakeFiles/Lab03.dir/flags.make
 CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o: ../src/ZWEngine.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o -c /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/ZWEngine.cpp
 
 CMakeFiles/Lab03.dir/src/ZWEngine.cpp.i: cmake_force
@@ -267,7 +293,7 @@ CMakeFiles/Lab03.dir/src/ZWEngine.cpp.s: cmake_force
 
 CMakeFiles/Lab03.dir/src/custom_func.cpp.o: CMakeFiles/Lab03.dir/flags.make
 CMakeFiles/Lab03.dir/src/custom_func.cpp.o: ../src/custom_func.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/Lab03.dir/src/custom_func.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/Lab03.dir/src/custom_func.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Lab03.dir/src/custom_func.cpp.o -c /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/custom_func.cpp
 
 CMakeFiles/Lab03.dir/src/custom_func.cpp.i: cmake_force
@@ -280,7 +306,7 @@ CMakeFiles/Lab03.dir/src/custom_func.cpp.s: cmake_force
 
 CMakeFiles/Lab03.dir/src/glad.c.o: CMakeFiles/Lab03.dir/flags.make
 CMakeFiles/Lab03.dir/src/glad.c.o: ../src/glad.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/Lab03.dir/src/glad.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/Lab03.dir/src/glad.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Lab03.dir/src/glad.c.o   -c /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/glad.c
 
 CMakeFiles/Lab03.dir/src/glad.c.i: cmake_force
@@ -293,7 +319,7 @@ CMakeFiles/Lab03.dir/src/glad.c.s: cmake_force
 
 CMakeFiles/Lab03.dir/src/main.cpp.o: CMakeFiles/Lab03.dir/flags.make
 CMakeFiles/Lab03.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/Lab03.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/Lab03.dir/src/main.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Lab03.dir/src/main.cpp.o -c /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/main.cpp
 
 CMakeFiles/Lab03.dir/src/main.cpp.i: cmake_force
@@ -306,7 +332,7 @@ CMakeFiles/Lab03.dir/src/main.cpp.s: cmake_force
 
 CMakeFiles/Lab03.dir/src/stb_image.cpp.o: CMakeFiles/Lab03.dir/flags.make
 CMakeFiles/Lab03.dir/src/stb_image.cpp.o: ../src/stb_image.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/Lab03.dir/src/stb_image.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/Lab03.dir/src/stb_image.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Lab03.dir/src/stb_image.cpp.o -c /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/src/stb_image.cpp
 
 CMakeFiles/Lab03.dir/src/stb_image.cpp.i: cmake_force
@@ -329,7 +355,9 @@ Lab03_OBJECTS = \
 "CMakeFiles/Lab03.dir/src/ElementBufferObject.cpp.o" \
 "CMakeFiles/Lab03.dir/src/Mesh.cpp.o" \
 "CMakeFiles/Lab03.dir/src/Node.cpp.o" \
+"CMakeFiles/Lab03.dir/src/Point.cpp.o" \
 "CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.o" \
+"CMakeFiles/Lab03.dir/src/Surface.cpp.o" \
 "CMakeFiles/Lab03.dir/src/Texture.cpp.o" \
 "CMakeFiles/Lab03.dir/src/Tree.cpp.o" \
 "CMakeFiles/Lab03.dir/src/VertexArrayObject.cpp.o" \
@@ -353,7 +381,9 @@ Lab03: CMakeFiles/Lab03.dir/src/Camera.cpp.o
 Lab03: CMakeFiles/Lab03.dir/src/ElementBufferObject.cpp.o
 Lab03: CMakeFiles/Lab03.dir/src/Mesh.cpp.o
 Lab03: CMakeFiles/Lab03.dir/src/Node.cpp.o
+Lab03: CMakeFiles/Lab03.dir/src/Point.cpp.o
 Lab03: CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.o
+Lab03: CMakeFiles/Lab03.dir/src/Surface.cpp.o
 Lab03: CMakeFiles/Lab03.dir/src/Texture.cpp.o
 Lab03: CMakeFiles/Lab03.dir/src/Tree.cpp.o
 Lab03: CMakeFiles/Lab03.dir/src/VertexArrayObject.cpp.o
@@ -365,7 +395,7 @@ Lab03: CMakeFiles/Lab03.dir/src/main.cpp.o
 Lab03: CMakeFiles/Lab03.dir/src/stb_image.cpp.o
 Lab03: CMakeFiles/Lab03.dir/build.make
 Lab03: CMakeFiles/Lab03.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Linking CXX executable Lab03"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Linking CXX executable Lab03"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Lab03.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

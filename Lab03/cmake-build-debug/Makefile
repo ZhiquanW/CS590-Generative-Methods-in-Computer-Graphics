@@ -393,6 +393,33 @@ src/Node.cpp.s:
 	$(MAKE) -f CMakeFiles/Lab03.dir/build.make CMakeFiles/Lab03.dir/src/Node.cpp.s
 .PHONY : src/Node.cpp.s
 
+src/Point.o: src/Point.cpp.o
+
+.PHONY : src/Point.o
+
+# target to build an object file
+src/Point.cpp.o:
+	$(MAKE) -f CMakeFiles/Lab03.dir/build.make CMakeFiles/Lab03.dir/src/Point.cpp.o
+.PHONY : src/Point.cpp.o
+
+src/Point.i: src/Point.cpp.i
+
+.PHONY : src/Point.i
+
+# target to preprocess a source file
+src/Point.cpp.i:
+	$(MAKE) -f CMakeFiles/Lab03.dir/build.make CMakeFiles/Lab03.dir/src/Point.cpp.i
+.PHONY : src/Point.cpp.i
+
+src/Point.s: src/Point.cpp.s
+
+.PHONY : src/Point.s
+
+# target to generate assembly for a file
+src/Point.cpp.s:
+	$(MAKE) -f CMakeFiles/Lab03.dir/build.make CMakeFiles/Lab03.dir/src/Point.cpp.s
+.PHONY : src/Point.cpp.s
+
 src/ShaderProgram.o: src/ShaderProgram.cpp.o
 
 .PHONY : src/ShaderProgram.o
@@ -419,6 +446,33 @@ src/ShaderProgram.s: src/ShaderProgram.cpp.s
 src/ShaderProgram.cpp.s:
 	$(MAKE) -f CMakeFiles/Lab03.dir/build.make CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.s
 .PHONY : src/ShaderProgram.cpp.s
+
+src/Surface.o: src/Surface.cpp.o
+
+.PHONY : src/Surface.o
+
+# target to build an object file
+src/Surface.cpp.o:
+	$(MAKE) -f CMakeFiles/Lab03.dir/build.make CMakeFiles/Lab03.dir/src/Surface.cpp.o
+.PHONY : src/Surface.cpp.o
+
+src/Surface.i: src/Surface.cpp.i
+
+.PHONY : src/Surface.i
+
+# target to preprocess a source file
+src/Surface.cpp.i:
+	$(MAKE) -f CMakeFiles/Lab03.dir/build.make CMakeFiles/Lab03.dir/src/Surface.cpp.i
+.PHONY : src/Surface.cpp.i
+
+src/Surface.s: src/Surface.cpp.s
+
+.PHONY : src/Surface.s
+
+# target to generate assembly for a file
+src/Surface.cpp.s:
+	$(MAKE) -f CMakeFiles/Lab03.dir/build.make CMakeFiles/Lab03.dir/src/Surface.cpp.s
+.PHONY : src/Surface.cpp.s
 
 src/Texture.o: src/Texture.cpp.o
 
@@ -702,9 +756,15 @@ help:
 	@echo "... src/Node.o"
 	@echo "... src/Node.i"
 	@echo "... src/Node.s"
+	@echo "... src/Point.o"
+	@echo "... src/Point.i"
+	@echo "... src/Point.s"
 	@echo "... src/ShaderProgram.o"
 	@echo "... src/ShaderProgram.i"
 	@echo "... src/ShaderProgram.s"
+	@echo "... src/Surface.o"
+	@echo "... src/Surface.i"
+	@echo "... src/Surface.s"
 	@echo "... src/Texture.o"
 	@echo "... src/Texture.i"
 	@echo "... src/Texture.s"

@@ -156,3 +156,6 @@ bool ZWEngine::attach_camera(Camera camera) {
 Camera &ZWEngine::get_camera() {
     return this->main_camera;
 }
+VertexArrayObject ZWEngine::get_vao(const std::string &name) {
+    return this->vao_map[name];
+}

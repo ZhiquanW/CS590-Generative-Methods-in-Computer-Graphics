@@ -50,14 +50,22 @@ CMakeFiles/Lab03.dir/src/Mesh.cpp.o: ../src/Mesh.cpp
 CMakeFiles/Lab03.dir/src/Node.cpp.o: ../include/Node.h
 CMakeFiles/Lab03.dir/src/Node.cpp.o: ../src/Node.cpp
 
+CMakeFiles/Lab03.dir/src/Point.cpp.o: ../include/Point.h
+CMakeFiles/Lab03.dir/src/Point.cpp.o: ../src/Point.cpp
+
 CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.o: ../include/ShaderProgram.h
 CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.o: ../src/ShaderProgram.cpp
+
+CMakeFiles/Lab03.dir/src/Surface.cpp.o: ../include/Surface.h
+CMakeFiles/Lab03.dir/src/Surface.cpp.o: ../src/Surface.cpp
 
 CMakeFiles/Lab03.dir/src/Texture.cpp.o: ../include/Texture.h
 CMakeFiles/Lab03.dir/src/Texture.cpp.o: ../include/stb_image.h
 CMakeFiles/Lab03.dir/src/Texture.cpp.o: ../src/Texture.cpp
 
 CMakeFiles/Lab03.dir/src/Tree.cpp.o: ../include/Node.h
+CMakeFiles/Lab03.dir/src/Tree.cpp.o: ../include/Point.h
+CMakeFiles/Lab03.dir/src/Tree.cpp.o: ../include/Surface.h
 CMakeFiles/Lab03.dir/src/Tree.cpp.o: ../include/Tree.h
 CMakeFiles/Lab03.dir/src/Tree.cpp.o: ../src/Tree.cpp
 
@@ -70,7 +78,9 @@ CMakeFiles/Lab03.dir/src/VertexBufferObject.cpp.o: ../src/VertexBufferObject.cpp
 CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o: ../include/Camera.h
 CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o: ../include/ElementBufferObject.h
 CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o: ../include/Node.h
+CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o: ../include/Point.h
 CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o: ../include/ShaderProgram.h
+CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o: ../include/Surface.h
 CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o: ../include/Texture.h
 CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o: ../include/Tree.h
 CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o: ../include/VertexArrayObject.h
@@ -85,7 +95,9 @@ CMakeFiles/Lab03.dir/src/ZWEngine.cpp.o: ../src/ZWEngine.cpp
 CMakeFiles/Lab03.dir/src/custom_func.cpp.o: ../include/Camera.h
 CMakeFiles/Lab03.dir/src/custom_func.cpp.o: ../include/ElementBufferObject.h
 CMakeFiles/Lab03.dir/src/custom_func.cpp.o: ../include/Node.h
+CMakeFiles/Lab03.dir/src/custom_func.cpp.o: ../include/Point.h
 CMakeFiles/Lab03.dir/src/custom_func.cpp.o: ../include/ShaderProgram.h
+CMakeFiles/Lab03.dir/src/custom_func.cpp.o: ../include/Surface.h
 CMakeFiles/Lab03.dir/src/custom_func.cpp.o: ../include/Texture.h
 CMakeFiles/Lab03.dir/src/custom_func.cpp.o: ../include/Tree.h
 CMakeFiles/Lab03.dir/src/custom_func.cpp.o: ../include/VertexArrayObject.h
@@ -100,7 +112,9 @@ CMakeFiles/Lab03.dir/src/custom_func.cpp.o: ../src/custom_func.cpp
 CMakeFiles/Lab03.dir/src/main.cpp.o: ../include/Camera.h
 CMakeFiles/Lab03.dir/src/main.cpp.o: ../include/ElementBufferObject.h
 CMakeFiles/Lab03.dir/src/main.cpp.o: ../include/Node.h
+CMakeFiles/Lab03.dir/src/main.cpp.o: ../include/Point.h
 CMakeFiles/Lab03.dir/src/main.cpp.o: ../include/ShaderProgram.h
+CMakeFiles/Lab03.dir/src/main.cpp.o: ../include/Surface.h
 CMakeFiles/Lab03.dir/src/main.cpp.o: ../include/Texture.h
 CMakeFiles/Lab03.dir/src/main.cpp.o: ../include/Tree.h
 CMakeFiles/Lab03.dir/src/main.cpp.o: ../include/VertexArrayObject.h

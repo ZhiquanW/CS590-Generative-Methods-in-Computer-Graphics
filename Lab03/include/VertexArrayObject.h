@@ -16,6 +16,7 @@
 class VertexArrayObject {
 private:
     GLuint vao_id;
+    GLuint elements_num;
     std::vector<GLuint> vbo_list;
     std::vector<GLuint> ebo_list;
 public:
@@ -33,6 +34,9 @@ public:
 
     void release();
 
+    GLuint get_elements_num();
+
+    void set_elements_num(GLuint );
 };
 
 

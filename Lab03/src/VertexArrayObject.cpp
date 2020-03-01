@@ -7,11 +7,11 @@
 #include "VertexArrayObject.h"
 #include <iostream>
 
-VertexArrayObject::VertexArrayObject() : vao_id(0) {
+VertexArrayObject::VertexArrayObject() : vao_id(0),elements_num(0) {
     glGenVertexArrays(1, &this->vao_id);
 }
 
-VertexArrayObject::VertexArrayObject(bool activate) : vao_id(0) {
+VertexArrayObject::VertexArrayObject(bool activate) : vao_id(0) ,elements_num(0){
     glGenVertexArrays(1, &this->vao_id);
     if (activate) {
         this->activate();
@@ -46,6 +46,14 @@ void VertexArrayObject::release() {
     }
     //release vao
     glDeleteVertexArrays(1, &this->vao_id);
+}
+
+GLuint VertexArrayObject::get_elements_num() {
+    return this->elements_num;
+}
+
+void VertexArrayObject::set_elements_num(GLuint en) {
+    this->elements_num = en;
 }
 //void VertexArrayObject::add_vertex_buffer_object(std::vector<glm::vec3> data,
 //                                                 GLuint index,

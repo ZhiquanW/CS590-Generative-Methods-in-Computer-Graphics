@@ -29,10 +29,14 @@ public:
     GLuint id;
     glm::vec3 pos;
     std::vector<std::vector<Node*> > connections;
+    std::vector<GLuint> occupied_surfaces;
     Node();
     explicit Node(glm::vec3 p);
     void add_connection(cnt_dir dir, Node *n);
+    std::vector<GLuint> unoccupied_dir();
     std::vector<GLuint> get_connections();
+    void add_occupied_surfaces(GLuint );
+    bool is_endpoint();
 };
 
 #endif //LAB03_NODE_H
