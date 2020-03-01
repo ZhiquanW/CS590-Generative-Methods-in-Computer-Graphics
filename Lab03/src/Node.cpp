@@ -17,22 +17,22 @@ Node::Node(glm::vec3 p):id(counter++),pos(p) {
 
 }
 
-void Node::add_connection(cnt_dir dir, Node *n){
+void Node::add_connection(cnt_dir dir,GLuint id){
     if(dir <0 || dir > 5){
         std::cout << "ERROR in Node::add_connection" << std::endl;
         return;
     }
-    connections[dir].push_back(n);
+    connections[dir].push_back(id);
 }
 std::vector<GLuint> Node::get_connections(){
     std::vector<GLuint> tmp_list;
-    std::vector<std::vector<Node *> >::iterator itor_0;
-    std::vector<Node *>::iterator itor_1;
+    std::vector<std::vector<GLuint> >::iterator itor_0;
+    std::vector<GLuint>::iterator itor_1;
     for(itor_0 = connections.begin();itor_0 != connections.end();++ itor_0){
         for(itor_1 = itor_0->begin(); itor_1 != itor_0->end();++ itor_1){
             tmp_list.emplace_back(this->id);
-            tmp_list.emplace_back((*itor_1)->id);
-            std::cout << this-> id << " --> " << (*itor_1)->id << std::endl;
+            tmp_list.emplace_back(*itor_1);
+            std::cout << this-> id << " --> " << *itor_1<< std::endl;
         }
     }
     return tmp_list;
@@ -40,7 +40,7 @@ std::vector<GLuint> Node::get_connections(){
 
 bool Node::is_endpoint(){
     GLuint cnt_num = 0;
-    std::vector<std::vector<Node *> >::iterator itor;
+    std::vector<std::vector<GLuint> >::iterator itor;
     for(itor = connections.begin(); itor != connections.end(); ++ itor){
        cnt_num += itor->size();
     }
@@ -61,11 +61,11 @@ void Node::add_occupied_surfaces(GLuint i) {
     this->occupied_surfaces[i] = 1;
 }
 
-void Node::add_vertex(Point* n){
-    this->vertices.emplace_back(n);
+void Node::add_vertex(GLuint n_id){
+    this->vertices.emplace_back(n_id);
 }
 
-std::vector<Point *> Node::get_vertices_by_dir(GLuint dir) {
+std::vector<GLuint > Node::get_vertices_by_dir(GLuint dir) {
     std::vector<glm::vec4> surface_dir_idx = {
             glm::vec4(2,3,7,6),
             glm::vec4(0,1,5,4),
@@ -75,10 +75,9 @@ std::vector<Point *> Node::get_vertices_by_dir(GLuint dir) {
             glm::vec4(0,2,6,4),
 
     };
-    std::vector<Point *> tmp_list;
-//    std::cout << this->id << std::endl;
-std::cout <<"N:"<< this->vertices.size() << std::endl;
+    std::vector<GLuint> tmp_list;
     tmp_list.emplace_back(this->vertices[surface_dir_idx[dir].x]);
+//    std::cout << this->vertices[surface_dir_idx[dir].x]->id << std::endl;
     tmp_list.emplace_back(this->vertices[surface_dir_idx[dir].y]);
     tmp_list.emplace_back(this->vertices[surface_dir_idx[dir].z]);
     tmp_list.emplace_back(this->vertices[surface_dir_idx[dir].w]);

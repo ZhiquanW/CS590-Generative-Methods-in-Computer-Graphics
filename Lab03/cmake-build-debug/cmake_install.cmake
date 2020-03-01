@@ -1,4 +1,4 @@
-# Install script for directory: /home/zhiquan/Git-Repository/CS590-Generative-Methods-in-Computer-Graphics/Lab03
+# Install script for directory: /home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/zhiquan/Git-Repository/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

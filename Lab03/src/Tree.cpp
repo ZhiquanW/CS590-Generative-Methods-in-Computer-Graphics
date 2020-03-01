@@ -7,20 +7,23 @@
 
 //#include <Tree.h>
 
+#include <set>
 #include "Tree.h"
+
 Tree::Tree(){
-    nodes.emplace_back(glm::vec3(0));
+    nodes.emplace_back(Node(glm::vec3(0,0,0)));
 }
 
-bool Tree::add_node(GLuint id,cnt_dir dir,Node &n){
+bool Tree::add_node(GLuint id,cnt_dir dir,Node n){
     //dir 0 up 1 down 2 left 3 right 4 front 5 back
     if(id < nodes.size()){
         n.add_occupied_surfaces(dir + pow(-1,dir%2));
         nodes.push_back(n);
-        nodes[id].add_connection(dir, &n);
+        nodes[id].add_connection(dir, n.id);
         nodes[id].add_occupied_surfaces(dir);
     }
 }
+
 std::vector<glm::vec3> Tree::generate_points(){
     std::vector<glm::vec3> tmp_list;
     std::vector<Node>::iterator itor;
@@ -29,6 +32,7 @@ std::vector<glm::vec3> Tree::generate_points(){
     }
     return tmp_list;
 }
+
 std::vector<GLuint> Tree::generate_connections(){
     std::vector<GLuint> tmp_list;
     std::vector<Node>::iterator itor;
@@ -38,6 +42,7 @@ std::vector<GLuint> Tree::generate_connections(){
     }
     return tmp_list;
 }
+
 void Tree::generate_surfaces(){
     //Generate surfaces for base point
     std::vector<glm::vec3> dirs = {glm::vec3 (-1,-1,-1),
@@ -59,38 +64,38 @@ void Tree::generate_surfaces(){
     };
     GLfloat offset = 0.1f;
     std::vector<Node>::iterator itor_n;
-    std::vector<glm::vec3>::iterator itor_d;
     for(itor_n = nodes.begin();itor_n != nodes.end();++ itor_n){
         //generate 8 points
         std::vector<GLuint> tmp_id;
-        std::cout << itor_n->id << std::endl;
+//        std::cout << itor_n->id << std::endl;
+        std::vector<glm::vec3>::iterator itor_d;
         for(itor_d = dirs.begin(); itor_d != dirs.end(); ++ itor_d){
             Point tmp_point(itor_n->pos);
             tmp_point.pos += *itor_d * offset;
             this->points.emplace_back(tmp_point);
-            tmp_id.emplace_back(tmp_point.id);
-            itor_n->add_vertex(&tmp_point);
+            tmp_id.emplace_back(points.size());
+            itor_n->add_vertex(points.size());
         }
         // generate empty surfaces
         std::vector<GLuint> unoccpied = itor_n->unoccupied_dir();
         std::vector<GLuint>::iterator itor_u;
         for(itor_u = unoccpied.begin();itor_u != unoccpied.end();++ itor_u){
             GLuint os_id = *itor_u;
-            std::cout << tmp_id[surface_dir_idx[os_id].x] << " , "<< tmp_id[surface_dir_idx[os_id].y] <<" , " << tmp_id[surface_dir_idx[os_id].z]<<" , " << tmp_id[surface_dir_idx[os_id].w] << std::endl;
+//            std::cout << tmp_id[surface_dir_idx[os_id].x] << " , "<< tmp_id[surface_dir_idx[os_id].y] <<" , " << tmp_id[surface_dir_idx[os_id].z]<<" , " << tmp_id[surface_dir_idx[os_id].w] << std::endl;
             this->surfaces.emplace_back(Surface(glm::vec4(tmp_id[surface_dir_idx[os_id].x],tmp_id[surface_dir_idx[os_id].y],tmp_id[surface_dir_idx[os_id].z],tmp_id[surface_dir_idx[os_id].w])));
         }
     }
-    std::vector<std::vector<Node*> >::iterator itor_c;
+    std::vector<std::vector<GLuint> >::iterator itor_c;
     for(itor_n = nodes.begin();itor_n != nodes.end();++ itor_n) {
         GLuint dir_counter = 0;
         for(itor_c = itor_n->connections.begin(); itor_c != itor_n->connections.end();++ itor_c){
             if(!itor_c->empty()){
-                std::vector<Point*> self_list = itor_n->get_vertices_by_dir(dir_counter);
-                std::vector<Point*> other_list =(*itor_c->begin())->get_vertices_by_dir(dir_counter + pow(-1,dir_counter%2 ));
-             //   this->surfaces.emplace_back(Surface(glm::vec4(self_list[0]->id,self_list[1]->id,other_list[0]->id,other_list[1]->id)));
-              //  this->surfaces.emplace_back(Surface(glm::vec4(self_list[0]->id,self_list[3]->id,other_list[0]->id,other_list[3]->id)));
-               // this->surfaces.emplace_back(Surface(glm::vec4(self_list[2]->id,self_list[1]->id,other_list[2]->id,other_list[1]->id)));
-                //this->surfaces.emplace_back(Surface(glm::vec4(self_list[2]->id,self_list[3]->id,other_list[2]->id,other_list[3]->id)));
+                std::vector<GLuint> self_list = itor_n->get_vertices_by_dir(dir_counter);
+                std::vector<GLuint> other_list =this->nodes[*(itor_c->begin())].get_vertices_by_dir(dir_counter + pow(-1,dir_counter%2 ));
+                this->surfaces.emplace_back(Surface(glm::vec4(self_list[0],self_list[1],other_list[1],other_list[0])));
+                this->surfaces.emplace_back(Surface(glm::vec4(self_list[0],self_list[3],other_list[3],other_list[0])));
+                this->surfaces.emplace_back(Surface(glm::vec4(self_list[2],self_list[1],other_list[1],other_list[2])));
+                this->surfaces.emplace_back(Surface(glm::vec4(self_list[2],self_list[3],other_list[3],other_list[2])));
 
             }
             dir_counter++;
@@ -120,4 +125,81 @@ std::vector<GLuint> Tree::get_surface_idx() {
         surface_idx.emplace_back(itor->indices[3]);
     }
     return surface_idx;
+}
+
+void Tree::subdivision(){
+    // calculcate new surfaces points, do not push
+    std::vector<Surface>::iterator itor_f;
+    for(itor_f = this->surfaces.begin();itor_f != this->surfaces.end();++ itor_f){
+        glm::vec3 tmp_c(0.0f);
+        for(int i =0 ;i < 4;++ i){
+            tmp_c += this->points[itor_f->indices[i]].pos;
+        }
+        itor_f->center_pt = tmp_c/4.0f;
+    }
+    //update vertex position
+    std::vector<Point>::iterator itor;
+    GLuint p_id = 0;
+    for(itor = this->points.begin();itor != this->points.end();++ itor){
+        std::set<Point> tmp_new_edge_points;
+        std::vector<GLuint> new_face_points;
+        //find adjacent surfaces
+        std::vector<GLuint> connected_surfaces_id = this->find_surface_by_point(p_id++);
+        //find adjacent edge
+        std::vector<GLuint> edges;
+        std::vector<GLuint>::iterator itor_cs;
+        for(itor_cs = connected_surfaces_id.begin();itor_cs != connected_surfaces_id.end();++ itor_cs){
+            std::vector<GLuint> tmp_edges = this->surfaces[*itor_cs].get_edges_by_p(itor->id);
+            edges.emplace_back(tmp_edges[0]);
+            edges.emplace_back(tmp_edges[1]);
+        }
+
+    }
+};
+
+std::vector<GLuint>Tree::find_surface_by_point(GLuint id) {
+    std::vector<GLuint> tmp_list;
+    std::vector<Surface>::iterator itor;
+    for(itor = this->surfaces.begin();itor!= this->surfaces.end();++ itor){
+        if(itor->is_contain_point(id)){
+            tmp_list.emplace_back(itor->id);
+        }
+    }
+    return tmp_list;
+}
+
+
+std::vector<GLuint> Tree::find_adjacent_surfaces_for_edge(GLuint e0,GLuint e1,std::vector<GLuint> surfaces_id){
+    std::vector<GLuint>::iterator itor;
+    for(itor = surfaces_id.begin(); itor != surfaces_id.end();++ itor){
+
+    }
+}
+
+std::vector<GLuint> Tree::arrange_surfaces(GLuint c,std::vector<GLuint> surfaces) {
+    std::vector<GLuint> out_list;
+    GLuint first_sur = *(surfaces.end()-1);
+    out_list.emplace_back(first_sur);
+    //get start edge;
+    std::vector<GLuint> first_edge;
+    first_edge.emplace_back(c);
+    first_edge.emplace_back(this->surfaces[first_sur].get_edges_by_p(c)[0]);
+    std::vector<GLuint> sec_edge;
+    first_edge.emplace_back(c);
+    first_edge.emplace_back(this->surfaces[first_sur].get_edges_by_p(c)[1]);
+    //
+    std::vector<GLuint>::iterator itor;
+    for(int i= 0;i < first_edge.size();++ i){
+            for(itor = surfaces.begin();itor != surfaces.end();++ itor){
+                int p0 = 0;
+                int p1 = 1;
+                if(this->surfaces[*itor].contain_edge(first_edge,p0,p1)){
+                    out_list.emplace_back(*itor);
+                    surfaces.erase(itor);
+                    first_edge.clear();
+                    first_edge.push_back(c);
+                    first_edge.push_back(p1);
+                }
+            }
+    }
 }

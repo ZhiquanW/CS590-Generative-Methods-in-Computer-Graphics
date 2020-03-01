@@ -24,15 +24,15 @@ void ZWEngine::set_render_info() {
     shader_program->use_shader_program();
     /*=========================== Setup Camera ===========================*/
     Camera main_cam;
-    main_camera.set_pos(glm::vec3(0, 3, 4));
+    main_camera.set_pos(glm::vec3(0, 2.5, 4));
     this->attach_camera(main_camera);
     /*=========================== Add Objects ===========================*/
     // init tree nodes
     this->my_tree.add_node(0,up,Node(glm::vec3(0,1,0)));
-    this->my_tree.add_node(1,right,Node(glm::vec3(0.25,1.4,0.4)));
-    this->my_tree.add_node(1,up,Node(glm::vec3(-0.25,1.9,0.0)));
-    this->my_tree.add_node(1,up,Node(glm::vec3(0.25,1.6,-0.4)));
-    this->my_tree.add_node(4,up,Node(glm::vec3(0.3,1.8,-0.5)));
+    this->my_tree.add_node(1,right,Node(glm::vec3(0.4,1.2,0.1)));
+    this->my_tree.add_node(1,up,Node(glm::vec3(-0.25,1.9,-0.15)));
+    this->my_tree.add_node(1,left,Node(glm::vec3(-0.5,1.3,0.2)));
+    this->my_tree.add_node(4,up,Node(glm::vec3(-0.5,1.8,0.5)));
     std::vector<glm::vec3> nodes_pos = this->my_tree.generate_points();
     std::vector<GLuint> connections = this->my_tree.generate_connections();
     tree_segment_num_2x = connections.size();

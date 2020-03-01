@@ -12,16 +12,22 @@
 
 class Tree {
 public:
-    std::vector<Node> nodes;
-    std::vector<Surface> surfaces;
-    std::vector<Point> points;
+    std::vector<Node> nodes; //nodes on tree branch
+    std::vector<Surface> surfaces; //tree surfaces
+    std::vector<Point> points; //points on surfaces
     Tree();
-    bool add_node(GLuint id,cnt_dir dir,Node &n);
+    bool add_node(GLuint id,cnt_dir dir,Node n);
     std::vector<glm::vec3> generate_points();
     std::vector<GLuint> generate_connections();
     void generate_surfaces();
     std::vector<glm::vec3> get_point_pos();
     std::vector<GLuint> get_surface_idx();
+
+    void subdivision();
+
+    std::vector<GLuint> find_surface_by_point(GLuint);
+    std::vector<GLuint> find_adjacent_surfaces_for_edge(GLuint,GLuint,std::vector<GLuint>);
+    std::vector<GLuint> arrange_surfaces(GLuint,std::vector<GLuint>);
 };
 
 

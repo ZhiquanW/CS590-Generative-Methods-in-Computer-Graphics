@@ -29,18 +29,18 @@ public:
     static GLuint counter;
     GLuint id;
     glm::vec3 pos;
-    std::vector<std::vector<Node*> > connections;
+    std::vector<std::vector<GLuint> > connections;
     std::vector<GLuint> occupied_surfaces;
-    std::vector<Point *> vertices;
+    std::vector<GLuint> vertices;
     Node();
     explicit Node(glm::vec3 p);
-    void add_connection(cnt_dir dir, Node *n);
+    void add_connection(cnt_dir dir,GLuint);
     std::vector<GLuint> unoccupied_dir();
     std::vector<GLuint> get_connections();
     void add_occupied_surfaces(GLuint );
     bool is_endpoint();
-    void add_vertex(Point * );
-    std::vector<Point* > get_vertices_by_dir(GLuint);
+    void add_vertex(GLuint);
+    std::vector<GLuint> get_vertices_by_dir(GLuint);
 };
 
 #endif //LAB03_NODE_H

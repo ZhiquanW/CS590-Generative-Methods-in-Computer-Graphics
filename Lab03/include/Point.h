@@ -16,6 +16,7 @@ public:
     glm::vec3 pos{};
     Point();
     Point(glm::vec3);
+    bool operator <(const Point p) const ;
 };
 
 

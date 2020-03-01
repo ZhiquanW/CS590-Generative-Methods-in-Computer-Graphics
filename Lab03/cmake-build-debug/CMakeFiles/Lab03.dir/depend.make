@@ -57,6 +57,7 @@ CMakeFiles/Lab03.dir/src/Point.cpp.o: ../src/Point.cpp
 CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.o: ../include/ShaderProgram.h
 CMakeFiles/Lab03.dir/src/ShaderProgram.cpp.o: ../src/ShaderProgram.cpp
 
+CMakeFiles/Lab03.dir/src/Surface.cpp.o: ../include/Point.h
 CMakeFiles/Lab03.dir/src/Surface.cpp.o: ../include/Surface.h
 CMakeFiles/Lab03.dir/src/Surface.cpp.o: ../src/Surface.cpp
 
