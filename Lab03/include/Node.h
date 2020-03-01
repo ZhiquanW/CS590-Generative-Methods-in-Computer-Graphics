@@ -15,6 +15,7 @@
 
 #include <map>
 #include <vector>
+#include "Point.h"
 enum cnt_dir{
     up = 0,
     down = 1,
@@ -30,6 +31,7 @@ public:
     glm::vec3 pos;
     std::vector<std::vector<Node*> > connections;
     std::vector<GLuint> occupied_surfaces;
+    std::vector<Point *> vertices;
     Node();
     explicit Node(glm::vec3 p);
     void add_connection(cnt_dir dir, Node *n);
@@ -37,6 +39,8 @@ public:
     std::vector<GLuint> get_connections();
     void add_occupied_surfaces(GLuint );
     bool is_endpoint();
+    void add_vertex(Point * );
+    std::vector<Point* > get_vertices_by_dir(GLuint);
 };
 
 #endif //LAB03_NODE_H

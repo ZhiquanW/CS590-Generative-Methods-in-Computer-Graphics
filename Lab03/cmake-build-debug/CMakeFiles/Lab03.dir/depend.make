@@ -48,6 +48,7 @@ CMakeFiles/Lab03.dir/src/Mesh.cpp.o: ../include/Texture.h
 CMakeFiles/Lab03.dir/src/Mesh.cpp.o: ../src/Mesh.cpp
 
 CMakeFiles/Lab03.dir/src/Node.cpp.o: ../include/Node.h
+CMakeFiles/Lab03.dir/src/Node.cpp.o: ../include/Point.h
 CMakeFiles/Lab03.dir/src/Node.cpp.o: ../src/Node.cpp
 
 CMakeFiles/Lab03.dir/src/Point.cpp.o: ../include/Point.h

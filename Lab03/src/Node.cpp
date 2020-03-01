@@ -14,6 +14,7 @@ Node::Node():id(counter++),pos(glm::vec3(0)){
 Node::Node(glm::vec3 p):id(counter++),pos(p) {
     connections.resize(6);
     occupied_surfaces.resize(6);
+
 }
 
 void Node::add_connection(cnt_dir dir, Node *n){
@@ -60,3 +61,26 @@ void Node::add_occupied_surfaces(GLuint i) {
     this->occupied_surfaces[i] = 1;
 }
 
+void Node::add_vertex(Point* n){
+    this->vertices.emplace_back(n);
+}
+
+std::vector<Point *> Node::get_vertices_by_dir(GLuint dir) {
+    std::vector<glm::vec4> surface_dir_idx = {
+            glm::vec4(2,3,7,6),
+            glm::vec4(0,1,5,4),
+            glm::vec4(0,1,3,2),
+            glm::vec4(4,5,7,6),
+            glm::vec4(1,3,7,5),
+            glm::vec4(0,2,6,4),
+
+    };
+    std::vector<Point *> tmp_list;
+//    std::cout << this->id << std::endl;
+std::cout <<"N:"<< this->vertices.size() << std::endl;
+    tmp_list.emplace_back(this->vertices[surface_dir_idx[dir].x]);
+    tmp_list.emplace_back(this->vertices[surface_dir_idx[dir].y]);
+    tmp_list.emplace_back(this->vertices[surface_dir_idx[dir].z]);
+    tmp_list.emplace_back(this->vertices[surface_dir_idx[dir].w]);
+    return tmp_list;
+}

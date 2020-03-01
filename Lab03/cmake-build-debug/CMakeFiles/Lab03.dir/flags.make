@@ -7,11 +7,11 @@ C_FLAGS = -g
 
 C_DEFINES = 
 
-C_INCLUDES = -I/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/include 
+C_INCLUDES = -I/home/zhiquan/Git-Repository/CS590-Generative-Methods-in-Computer-Graphics/Lab03/include 
 
 CXX_FLAGS = -g   -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/vrlab/Git-Repositories/CS590-Generative-Methods-in-Computer-Graphics/Lab03/include 
+CXX_INCLUDES = -I/home/zhiquan/Git-Repository/CS590-Generative-Methods-in-Computer-Graphics/Lab03/include 
 
