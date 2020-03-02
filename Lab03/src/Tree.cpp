@@ -62,7 +62,7 @@ void Tree::generate_surfaces(){
             glm::vec4(0,2,6,4),
 
     };
-    GLfloat offset = 1.f;
+    GLfloat offset = 0.2f;
     std::vector<Node>::iterator itor_n;
     for(itor_n = nodes.begin();itor_n != nodes.end();++ itor_n){
         //generate 8 points
@@ -137,13 +137,16 @@ void Tree::subdivision(){
             tmp_c += this->points[itor_f->indices[i]].pos;
         }
         itor_f->center_pt = tmp_c/4.0f;
+//        std::cout << "C " << itor_f->center_pt.x << " "<<itor_f->center_pt.y<< " "<<itor_f->center_pt.z << " "<<std::endl;
     }
     //update vertex position
 //    std::vector<Point>::iterator itor;
     GLuint old_size = this->points.size();
-//    Surface::counter = 0;
+    Surface::counter = 0;
 //    Point::counter = 0;
+    int aa = 0;
     for(int p_id = 0;p_id <old_size;++ p_id){
+
         glm::vec3 sum_surfaces_points(0);
         glm::vec3 sum_edge_points(0);
 //        std::cout << p_id << std::endl;
@@ -151,17 +154,24 @@ void Tree::subdivision(){
         std::vector<GLuint> new_face_points;
         //find adjacent surfaces
         std::vector<GLuint> connected_surfaces_id = this->find_surface_by_point(this->points[p_id].id);
-//        std::cout << this->points[p_id].id  << std::endl;
+//        std::cout << "id :" << this->points[p_id].id  << std::endl;
 //        std::cout << connected_surfaces_id.size() << std::endl;
         //arrange surfaces
         std::vector<GLuint> arranged_surfaces_id = this->arrange_surfaces(this->points[p_id].id,connected_surfaces_id);
         //generate new face points
         std::vector<GLuint>::iterator itor_as;
         for(itor_as = arranged_surfaces_id.begin();itor_as != arranged_surfaces_id.end();++ itor_as){
-            Point tmp_p = Point(this->surfaces[*itor_as].center_pt);
-            new_points.emplace_back(tmp_p);
-            new_face_points.emplace_back(tmp_p.id);
+            Point tmp_p = Point(this->surfaces[*itor_as].center_pt, false);
             sum_surfaces_points += tmp_p.pos;
+            auto tmp_p_ptr = std::find(new_points.begin(),new_points.end(),tmp_p);
+            if(tmp_p_ptr != new_points.end()){
+                new_face_points.emplace_back(tmp_p_ptr->id);
+            }else {
+                tmp_p.id = Point::counter++;
+                new_points.emplace_back(tmp_p);
+                new_face_points.emplace_back(tmp_p.id);
+//                aa++;
+            }
         }
         // generate new edge points
 //        std::cout << arranged_surfaces_id.size() << std::endl;
@@ -172,25 +182,32 @@ void Tree::subdivision(){
                                 this->surfaces[sur_id_1].center_pt;
             std::vector<GLuint> con_edge_p = this->get_con_edge_by_surface(sur_id_0,sur_id_1);
             tmp_pos += this->points[con_edge_p[0]].pos + this->points[con_edge_p[1]].pos;
+
             tmp_pos /=4;
             sum_edge_points += tmp_pos;
             Point tmp_p(tmp_pos, false);
-            auto tmp_p_ptr = std::find(this->points.begin(),this->points.end(),tmp_p);
-            if(tmp_p_ptr != this->points.end()){
+            auto tmp_p_ptr = std::find(new_points.begin(),new_points.end(),tmp_p);
+            if(tmp_p_ptr != new_points.end()){
                 tmp_new_edge_points.emplace_back(tmp_p_ptr->id);
+//                std::cout  << "AAA" << std::endl;
             }else{
                 tmp_p.id = Point::counter++;
                 new_points.emplace_back(tmp_p);
                 tmp_new_edge_points.emplace_back(tmp_p.id);
+                aa++;
             }
         }
         // generate new surfaces
+//        std::cout << new_face_points.size() << std::endl;
         for(int i =0 ;i < new_face_points.size();++ i){
             GLuint id_0 = new_face_points[i];
             GLuint id_1 = tmp_new_edge_points[i];
             GLuint id_2 = this->points[p_id].id;
             GLuint id_3 = tmp_new_edge_points[(i-1+tmp_new_edge_points.size())%tmp_new_edge_points.size()];
-            new_surfaces.emplace_back(Surface(glm::vec4(id_0,id_1,id_2,id_3)));
+//            std::cout << id_0 << " " << id_1 << " " << id_2 << " " << id_3 << std::endl;
+            Surface tmp_sur (glm::vec4(id_0,id_1,id_2,id_3));
+//            std::cout << tmp_sur.id << std::endl;
+            new_surfaces.emplace_back(tmp_sur);
 //            std::cout  << "s " << Surface::counter << std::endl;
         }
         // update old points position
@@ -213,7 +230,7 @@ std::vector<GLuint>Tree::find_surface_by_point(GLuint id) {
             tmp_list.emplace_back(itor->id);
         }
     }
-
+//    std::cout << tmp_list.size() << std::endl;
     return tmp_list;
 }
 

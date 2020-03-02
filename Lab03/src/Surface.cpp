@@ -38,11 +38,6 @@ glm::vec2 Surface::get_edges_by_p(GLuint in_id){
         }
     }
     return glm::vec2(this->indices[(tmp_id+1)%4],this->indices[(tmp_id+3)%4]);
-//    std::cout << (tmp_id+1) % 4 << std::endl;
-//    tmp_list.emplace_back((tmp_id+1)%4);
-//    std::cout << (tmp_id-1+4) % 4 << std::endl;
-//    tmp_list.emplace_back((tmp_id-1+4)%4);
-//    std::cout << "a" << std::endl;
 }
 
 bool Surface::contain_edge(std::vector<GLuint> edge){

@@ -28,5 +28,6 @@ bool Point::operator <(const Point p) const
     }
 }
 bool Point::operator ==(const Point p) const {
-    return this->pos.x == p.pos.x && this->pos.y == p.pos.y && this->pos.z == p.pos.z;
+//    return true;
+    return abs(this->pos.x - p.pos.x) < 0.001f && abs(this->pos.y - p.pos.y)<0.001f && abs(this->pos.z - p.pos.z)<0.001f;
 }
