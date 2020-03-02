@@ -83,3 +83,4 @@ std::vector<GLuint > Node::get_vertices_by_dir(GLuint dir) {
     tmp_list.emplace_back(this->vertices[surface_dir_idx[dir].w]);
     return tmp_list;
 }
+

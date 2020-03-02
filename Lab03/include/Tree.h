@@ -9,7 +9,7 @@
 #include "Node.h"
 #include "Surface.h"
 #include "Point.h"
-
+#include <algorithm>
 class Tree {
 public:
     std::vector<Node> nodes; //nodes on tree branch
@@ -28,6 +28,7 @@ public:
     std::vector<GLuint> find_surface_by_point(GLuint);
     std::vector<GLuint> find_adjacent_surfaces_for_edge(GLuint,GLuint,std::vector<GLuint>);
     std::vector<GLuint> arrange_surfaces(GLuint,std::vector<GLuint>);
+    std::vector<GLuint> get_con_edge_by_surface(GLuint,GLuint);
 };
 
 

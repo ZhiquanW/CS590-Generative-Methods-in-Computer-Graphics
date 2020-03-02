@@ -62,7 +62,7 @@ void Tree::generate_surfaces(){
             glm::vec4(0,2,6,4),
 
     };
-    GLfloat offset = 0.1f;
+    GLfloat offset = 1.f;
     std::vector<Node>::iterator itor_n;
     for(itor_n = nodes.begin();itor_n != nodes.end();++ itor_n){
         //generate 8 points
@@ -73,8 +73,8 @@ void Tree::generate_surfaces(){
             Point tmp_point(itor_n->pos);
             tmp_point.pos += *itor_d * offset;
             this->points.emplace_back(tmp_point);
-            tmp_id.emplace_back(points.size());
-            itor_n->add_vertex(points.size());
+            tmp_id.emplace_back(tmp_point.id);
+            itor_n->add_vertex(tmp_point.id);
         }
         // generate empty surfaces
         std::vector<GLuint> unoccpied = itor_n->unoccupied_dir();
@@ -96,7 +96,6 @@ void Tree::generate_surfaces(){
                 this->surfaces.emplace_back(Surface(glm::vec4(self_list[0],self_list[3],other_list[3],other_list[0])));
                 this->surfaces.emplace_back(Surface(glm::vec4(self_list[2],self_list[1],other_list[1],other_list[2])));
                 this->surfaces.emplace_back(Surface(glm::vec4(self_list[2],self_list[3],other_list[3],other_list[2])));
-
             }
             dir_counter++;
         }
@@ -128,6 +127,8 @@ std::vector<GLuint> Tree::get_surface_idx() {
 }
 
 void Tree::subdivision(){
+    std::vector<Surface> new_surfaces;
+    std::vector<Point> new_points(this->points);
     // calculcate new surfaces points, do not push
     std::vector<Surface>::iterator itor_f;
     for(itor_f = this->surfaces.begin();itor_f != this->surfaces.end();++ itor_f){
@@ -138,23 +139,70 @@ void Tree::subdivision(){
         itor_f->center_pt = tmp_c/4.0f;
     }
     //update vertex position
-    std::vector<Point>::iterator itor;
-    GLuint p_id = 0;
-    for(itor = this->points.begin();itor != this->points.end();++ itor){
-        std::set<Point> tmp_new_edge_points;
+//    std::vector<Point>::iterator itor;
+    GLuint old_size = this->points.size();
+//    Surface::counter = 0;
+//    Point::counter = 0;
+    for(int p_id = 0;p_id <old_size;++ p_id){
+        glm::vec3 sum_surfaces_points(0);
+        glm::vec3 sum_edge_points(0);
+//        std::cout << p_id << std::endl;
+        std::vector<GLuint> tmp_new_edge_points;
         std::vector<GLuint> new_face_points;
         //find adjacent surfaces
-        std::vector<GLuint> connected_surfaces_id = this->find_surface_by_point(p_id++);
-        //find adjacent edge
-        std::vector<GLuint> edges;
-        std::vector<GLuint>::iterator itor_cs;
-        for(itor_cs = connected_surfaces_id.begin();itor_cs != connected_surfaces_id.end();++ itor_cs){
-            std::vector<GLuint> tmp_edges = this->surfaces[*itor_cs].get_edges_by_p(itor->id);
-            edges.emplace_back(tmp_edges[0]);
-            edges.emplace_back(tmp_edges[1]);
+        std::vector<GLuint> connected_surfaces_id = this->find_surface_by_point(this->points[p_id].id);
+//        std::cout << this->points[p_id].id  << std::endl;
+//        std::cout << connected_surfaces_id.size() << std::endl;
+        //arrange surfaces
+        std::vector<GLuint> arranged_surfaces_id = this->arrange_surfaces(this->points[p_id].id,connected_surfaces_id);
+        //generate new face points
+        std::vector<GLuint>::iterator itor_as;
+        for(itor_as = arranged_surfaces_id.begin();itor_as != arranged_surfaces_id.end();++ itor_as){
+            Point tmp_p = Point(this->surfaces[*itor_as].center_pt);
+            new_points.emplace_back(tmp_p);
+            new_face_points.emplace_back(tmp_p.id);
+            sum_surfaces_points += tmp_p.pos;
         }
-
+        // generate new edge points
+//        std::cout << arranged_surfaces_id.size() << std::endl;
+        for(int i =0;i < arranged_surfaces_id.size();++ i){
+            GLuint sur_id_0 = arranged_surfaces_id[i];
+            GLuint sur_id_1 = arranged_surfaces_id[(i+1)%arranged_surfaces_id.size()];
+            glm::vec3 tmp_pos = this->surfaces[sur_id_0].center_pt +
+                                this->surfaces[sur_id_1].center_pt;
+            std::vector<GLuint> con_edge_p = this->get_con_edge_by_surface(sur_id_0,sur_id_1);
+            tmp_pos += this->points[con_edge_p[0]].pos + this->points[con_edge_p[1]].pos;
+            tmp_pos /=4;
+            sum_edge_points += tmp_pos;
+            Point tmp_p(tmp_pos, false);
+            auto tmp_p_ptr = std::find(this->points.begin(),this->points.end(),tmp_p);
+            if(tmp_p_ptr != this->points.end()){
+                tmp_new_edge_points.emplace_back(tmp_p_ptr->id);
+            }else{
+                tmp_p.id = Point::counter++;
+                new_points.emplace_back(tmp_p);
+                tmp_new_edge_points.emplace_back(tmp_p.id);
+            }
+        }
+        // generate new surfaces
+        for(int i =0 ;i < new_face_points.size();++ i){
+            GLuint id_0 = new_face_points[i];
+            GLuint id_1 = tmp_new_edge_points[i];
+            GLuint id_2 = this->points[p_id].id;
+            GLuint id_3 = tmp_new_edge_points[(i-1+tmp_new_edge_points.size())%tmp_new_edge_points.size()];
+            new_surfaces.emplace_back(Surface(glm::vec4(id_0,id_1,id_2,id_3)));
+//            std::cout  << "s " << Surface::counter << std::endl;
+        }
+        // update old points position
+        GLfloat n = connected_surfaces_id.size();
+        sum_surfaces_points/=n;
+        sum_edge_points/=n;
+        new_points[p_id].pos = this->points[p_id].pos*(n-3.0f)/n+ sum_edge_points*2.0f/n + sum_surfaces_points/n;
     }
+
+    this->points = new_points;
+    this->surfaces = new_surfaces;
+
 };
 
 std::vector<GLuint>Tree::find_surface_by_point(GLuint id) {
@@ -165,6 +213,7 @@ std::vector<GLuint>Tree::find_surface_by_point(GLuint id) {
             tmp_list.emplace_back(itor->id);
         }
     }
+
     return tmp_list;
 }
 
@@ -176,30 +225,43 @@ std::vector<GLuint> Tree::find_adjacent_surfaces_for_edge(GLuint e0,GLuint e1,st
     }
 }
 
-std::vector<GLuint> Tree::arrange_surfaces(GLuint c,std::vector<GLuint> surfaces) {
-    std::vector<GLuint> out_list;
-    GLuint first_sur = *(surfaces.end()-1);
+std::vector<GLuint> Tree::arrange_surfaces(GLuint c,std::vector<GLuint> surfaces_idx) {
+   std::vector<GLuint> out_list;
+    GLuint first_sur = *(surfaces_idx.end() - 1);
     out_list.emplace_back(first_sur);
     //get start edge;
     std::vector<GLuint> first_edge;
     first_edge.emplace_back(c);
-    first_edge.emplace_back(this->surfaces[first_sur].get_edges_by_p(c)[0]);
-    std::vector<GLuint> sec_edge;
-    first_edge.emplace_back(c);
-    first_edge.emplace_back(this->surfaces[first_sur].get_edges_by_p(c)[1]);
-    //
+    first_edge.emplace_back(this->surfaces[first_sur].get_edges_by_p(c).x);
+
     std::vector<GLuint>::iterator itor;
-    for(int i= 0;i < first_edge.size();++ i){
-            for(itor = surfaces.begin();itor != surfaces.end();++ itor){
-                int p0 = 0;
-                int p1 = 1;
-                if(this->surfaces[*itor].contain_edge(first_edge,p0,p1)){
-                    out_list.emplace_back(*itor);
-                    surfaces.erase(itor);
+    GLuint s_size = surfaces_idx.size()-1;
+    for(int i= 0;i < s_size;++ i){
+            for(itor = surfaces_idx.begin(); itor != surfaces_idx.end(); ++ itor){
+                if(this->surfaces[*itor].contain_edge(first_edge)){
                     first_edge.clear();
+                    out_list.emplace_back(*itor);
+                    glm::vec2 ps = this->surfaces[*itor].get_edges_by_p(c);
+                    GLuint other_p = ps.x==first_edge[1] ? ps.y : ps.x;
                     first_edge.push_back(c);
-                    first_edge.push_back(p1);
+                    first_edge.push_back(other_p);
+                    surfaces_idx.erase(itor);
+                    break;
                 }
             }
     }
+    return out_list;
+}
+
+std::vector<GLuint> Tree::get_con_edge_by_surface(GLuint s0, GLuint s1) {
+    std::vector<GLuint> con_edge_ps;
+    for(int i =0;i < 4;++ i){
+        for(int j =0 ;j < 4;++ j){
+            if(this->surfaces[s0].indices[i] == this->surfaces[s1].indices[j]){
+                con_edge_ps.emplace_back(this->surfaces[s0].indices[i]);
+            }
+        }
+    }
+    return con_edge_ps;
+
 }

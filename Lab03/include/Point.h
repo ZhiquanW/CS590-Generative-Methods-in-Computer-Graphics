@@ -15,8 +15,9 @@ public:
     GLuint id;
     glm::vec3 pos{};
     Point();
-    Point(glm::vec3);
+    Point(glm::vec3,bool= true);
     bool operator <(const Point p) const ;
+    bool operator ==(const Point p) const ;
 };
 
 

@@ -9,10 +9,11 @@
 #include "Point.h"
 GLuint Point::counter;
 
-Point::Point():id(counter++) {
+Point::Point():id(-1) {
 }
 
-Point::Point(glm::vec3 p):id(counter++),pos(p){
+Point::Point(glm::vec3 p,bool increase):pos(p){
+    id = increase?counter++ : -1;
 }
 bool Point::operator <(const Point p) const
 {
@@ -25,4 +26,7 @@ bool Point::operator <(const Point p) const
     } else{
         return this->pos.x < p.pos.x;
     }
+}
+bool Point::operator ==(const Point p) const {
+    return this->pos.x == p.pos.x && this->pos.y == p.pos.y && this->pos.z == p.pos.z;
 }

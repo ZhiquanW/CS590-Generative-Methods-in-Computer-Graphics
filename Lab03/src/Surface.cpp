@@ -7,7 +7,7 @@
 #include <Surface.h>
 
 #include "Surface.h"
-
+#include <iostream>
 GLuint Surface::counter = 0;
 Surface::Surface():id(counter++) {
 
@@ -29,33 +29,31 @@ bool Surface::is_contain_point(GLuint pid) {
 void Surface::set_center_pt(glm::vec3 c){
     this->center_pt = c;
 }
-std::vector<GLuint> Surface::get_edges_by_p(GLuint id){
-    GLuint tmp_id;
+glm::vec2 Surface::get_edges_by_p(GLuint in_id){
+    GLuint tmp_id = -1;
     for(int i =0 ;i < 4;++ i){
-        if(id == this->indices[i]){
-            tmp_id = id;
+        if(in_id == this->indices[i]){
+            tmp_id = i;
+            break;
         }
     }
-    std::vector<GLuint> tmp_list;
-    tmp_list.emplace_back((id+1)%4);
-    tmp_list.emplace_back((id-1+4)%4);
-
+    return glm::vec2(this->indices[(tmp_id+1)%4],this->indices[(tmp_id+3)%4]);
+//    std::cout << (tmp_id+1) % 4 << std::endl;
+//    tmp_list.emplace_back((tmp_id+1)%4);
+//    std::cout << (tmp_id-1+4) % 4 << std::endl;
+//    tmp_list.emplace_back((tmp_id-1+4)%4);
+//    std::cout << "a" << std::endl;
 }
 
-bool Surface::contain_edge(std::vector<GLuint> edge,int &other0,int &other1){
+bool Surface::contain_edge(std::vector<GLuint> edge){
     bool b0 = false;
     bool b1 = false;
-    std::vector<GLuint> tmp;
     for(int i =0 ;i < 4;++ i){
         if(float(edge[0]) ==indices[i]){
             b0 = true;
         }else if(float(edge[1])==indices[i]){
             b1 = true;
-        }else{
-            tmp.emplace_back(indices[i]);
         }
     }
-    other0 = tmp[0];
-    other1 = tmp[1];
     return b0 && b1;
 }

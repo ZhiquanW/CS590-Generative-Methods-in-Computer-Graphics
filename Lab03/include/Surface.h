@@ -24,8 +24,8 @@ public:
     bool is_contain_point(GLuint);
     void set_center_pt(glm::vec3);
     void set_edge_pts(std::vector<Point>);
-    std::vector<GLuint> get_edges_by_p(GLuint);
-    bool contain_edge(std::vector<GLuint>,int&,int&);
+    glm::vec2 get_edges_by_p(GLuint);
+    bool contain_edge(std::vector<GLuint>);
 };
 
 
