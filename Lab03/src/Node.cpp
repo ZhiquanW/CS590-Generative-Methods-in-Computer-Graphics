@@ -32,7 +32,7 @@ std::vector<GLuint> Node::get_connections(){
         for(itor_1 = itor_0->begin(); itor_1 != itor_0->end();++ itor_1){
             tmp_list.emplace_back(this->id);
             tmp_list.emplace_back(*itor_1);
-            std::cout << this-> id << " --> " << *itor_1<< std::endl;
+//            std::cout << this-> id << " --> " << *itor_1<< std::endl;
         }
     }
     return tmp_list;
@@ -77,7 +77,6 @@ std::vector<GLuint > Node::get_vertices_by_dir(GLuint dir) {
     };
     std::vector<GLuint> tmp_list;
     tmp_list.emplace_back(this->vertices[surface_dir_idx[dir].x]);
-//    std::cout << this->vertices[surface_dir_idx[dir].x]->id << std::endl;
     tmp_list.emplace_back(this->vertices[surface_dir_idx[dir].y]);
     tmp_list.emplace_back(this->vertices[surface_dir_idx[dir].z]);
     tmp_list.emplace_back(this->vertices[surface_dir_idx[dir].w]);

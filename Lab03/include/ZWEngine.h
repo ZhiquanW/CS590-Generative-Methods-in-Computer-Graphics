@@ -65,6 +65,7 @@ private:
     GLfloat obj_angle = 0.0f;
     Tree my_tree;
     GLuint tree_segment_num_2x = 0;
+    GLuint cc = 0;
     //functions
     bool init_window(int, int);
 
@@ -85,11 +86,12 @@ private:
 
     //utilities functions
     void process_input();
+    void regenerate();
 
-    void add_vao(const std::string &, VertexArrayObject &);
+    void add_vao(const std::string &, VertexArrayObject );
 
     void activate_vao(const std::string &);
-    VertexArrayObject get_vao(const std::string &);
+    VertexArrayObject& get_vao(const std::string &);
     static void disable_vao();
 
     void add_texture(Texture);

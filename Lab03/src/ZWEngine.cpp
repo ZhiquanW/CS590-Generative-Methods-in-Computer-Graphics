@@ -49,7 +49,7 @@ void ZWEngine::run() {
     this->cleanup();
 }
 
-void ZWEngine::add_vao(const std::string &name, VertexArrayObject &vao) {
+void ZWEngine::add_vao(const std::string &name, VertexArrayObject vao) {
     this->vao_map.insert(std::pair<std::string, VertexArrayObject>(name, vao));
 }
 
@@ -156,6 +156,31 @@ bool ZWEngine::attach_camera(Camera camera) {
 Camera &ZWEngine::get_camera() {
     return this->main_camera;
 }
-VertexArrayObject ZWEngine::get_vao(const std::string &name) {
+VertexArrayObject& ZWEngine::get_vao(const std::string &name) {
     return this->vao_map[name];
+}
+void ZWEngine::regenerate() {
+    my_tree.clear();
+    this->my_tree.add_node(0, up, Node(glm::vec3(0, 1, 0)));
+    this->my_tree.add_node(1, right, Node(glm::vec3(0.4, 1.2 - this->my_tree.height, 0.1)));
+    this->my_tree.add_node(1, up, Node(glm::vec3(-0.25, 1.9 - this->my_tree.height, -0.15)));
+    this->my_tree.add_node(1, left, Node(glm::vec3(-0.5, 1.3 , 0.2)));
+    this->my_tree.add_node(4, up, Node(glm::vec3(-0.5, 1.8 - this->my_tree.height, 0.5)));
+    std::vector<glm::vec3> nodes_pos = this->my_tree.generate_points();
+    std::vector<GLuint> connections = this->my_tree.generate_connections();
+    my_tree.generate_surfaces();
+    std::vector<glm::vec3> position_list = this->my_tree.get_point_pos();
+    std::vector<GLuint> idx = this->my_tree.get_surface_idx();
+    VertexArrayObject surfaces_vao(true);
+    VertexBufferObject surfaces_vbo(position_list, GL_STATIC_DRAW);
+    ElementBufferObject surfaces_ebo(idx, GL_STATIC_DRAW);
+    //pos
+    bind_vertex_attribute(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *) nullptr);
+    surfaces_vao.attach_vbo(surfaces_vbo.id());
+    surfaces_vao.attach_ebo(surfaces_ebo.id());
+    surfaces_vao.set_elements_num(idx.size());
+    this->vao_map.clear();
+    this->add_vao("surfaces", surfaces_vao);
+    ZWEngine::disable_vao();
+    this->my_tree.gen_tree("model.obj");
 }

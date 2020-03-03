@@ -7,7 +7,9 @@
 
 //#include <Tree.h>
 
+#include <cmath>
 #include <set>
+//#include <f2c.h>
 #include "Tree.h"
 
 Tree::Tree(){
@@ -62,16 +64,16 @@ void Tree::generate_surfaces(){
             glm::vec4(0,2,6,4),
 
     };
-    GLfloat offset = 0.2f;
     std::vector<Node>::iterator itor_n;
     for(itor_n = nodes.begin();itor_n != nodes.end();++ itor_n){
         //generate 8 points
         std::vector<GLuint> tmp_id;
-//        std::cout << itor_n->id << std::endl;
         std::vector<glm::vec3>::iterator itor_d;
+        float factor = std::fmax(0.2,(2.0f-itor_n->pos.y)/3.0f);
+
         for(itor_d = dirs.begin(); itor_d != dirs.end(); ++ itor_d){
             Point tmp_point(itor_n->pos);
-            tmp_point.pos += *itor_d * offset;
+            tmp_point.pos += *itor_d * this->offset * factor;
             this->points.emplace_back(tmp_point);
             tmp_id.emplace_back(tmp_point.id);
             itor_n->add_vertex(tmp_point.id);
@@ -81,7 +83,6 @@ void Tree::generate_surfaces(){
         std::vector<GLuint>::iterator itor_u;
         for(itor_u = unoccpied.begin();itor_u != unoccpied.end();++ itor_u){
             GLuint os_id = *itor_u;
-//            std::cout << tmp_id[surface_dir_idx[os_id].x] << " , "<< tmp_id[surface_dir_idx[os_id].y] <<" , " << tmp_id[surface_dir_idx[os_id].z]<<" , " << tmp_id[surface_dir_idx[os_id].w] << std::endl;
             this->surfaces.emplace_back(Surface(glm::vec4(tmp_id[surface_dir_idx[os_id].x],tmp_id[surface_dir_idx[os_id].y],tmp_id[surface_dir_idx[os_id].z],tmp_id[surface_dir_idx[os_id].w])));
         }
     }
@@ -137,13 +138,10 @@ void Tree::subdivision(){
             tmp_c += this->points[itor_f->indices[i]].pos;
         }
         itor_f->center_pt = tmp_c/4.0f;
-//        std::cout << "C " << itor_f->center_pt.x << " "<<itor_f->center_pt.y<< " "<<itor_f->center_pt.z << " "<<std::endl;
     }
     //update vertex position
-//    std::vector<Point>::iterator itor;
     GLuint old_size = this->points.size();
     Surface::counter = 0;
-//    Point::counter = 0;
     int aa = 0;
     for(int p_id = 0;p_id <old_size;++ p_id){
 
@@ -281,4 +279,33 @@ std::vector<GLuint> Tree::get_con_edge_by_surface(GLuint s0, GLuint s1) {
     }
     return con_edge_ps;
 
+}
+
+void Tree::clear() {
+    this->nodes.clear();
+    this->surfaces.clear();
+    this->points.clear();
+    Node::counter = 0;
+    Point::counter = 0;
+    Surface::counter = 0;
+    nodes.emplace_back(Node(glm::vec3(0,0,0)));
+
+}
+
+void Tree::gen_tree(std::string filename) {
+    std::ofstream myfile;
+    myfile.open(filename.c_str());
+
+    myfile << "# vertices\n";
+    for (unsigned int i = 0; i < this->points.size(); i++) {
+        glm::vec3 tmp_p = this->points[i].pos;
+        myfile << "v " << tmp_p.z << " " << tmp_p.y << " " <<tmp_p.x<< "\n";
+    }
+    myfile << "# faces\n";
+    for (unsigned int i = 0; i < this->surfaces.size(); i++) {
+        glm::vec3 tmp_idx = this->surfaces[i].indices;
+        myfile << "f " << tmp_idx.x << " " << tmp_idx.y << " " <<tmp_idx.z<< "\n";
+    }
+    myfile.close();
+    std::cout <<" Obj Generated" << std::endl;
 }

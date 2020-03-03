@@ -35,6 +35,9 @@ void VertexArrayObject::attach_ebo(GLuint veo_id) {
 }
 
 void VertexArrayObject::release() {
+    //release vao
+//    glDeleteVertexArrays(1, &this->vao_id);
+//    this->vao_id = 0;
     //release vbo
     std::vector<GLuint>::iterator itor;
     for (itor = this->vbo_list.begin(); itor != this->vbo_list.end(); ++itor) {
@@ -44,8 +47,6 @@ void VertexArrayObject::release() {
     for (itor = this->ebo_list.begin(); itor != this->ebo_list.end(); ++itor) {
         glDeleteBuffers(1, &(*itor));
     }
-    //release vao
-    glDeleteVertexArrays(1, &this->vao_id);
 }
 
 GLuint VertexArrayObject::get_elements_num() {

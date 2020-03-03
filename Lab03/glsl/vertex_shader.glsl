@@ -7,6 +7,6 @@ layout(location = 4) uniform mat4 project;
 out float h;
 void main() {
     gl_Position =  project * view  * model * vec4(bPos.xyz, 1.0);
-    //    gl_Position = vec4(aPos.xyz, 1.0);
-    h = bPos.y;
+//        gl_Position = vec4(aPos.xyz, 1.0);
+//    h = bPos.y;
 }

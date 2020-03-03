@@ -29,45 +29,38 @@ void ZWEngine::set_render_info() {
     this->attach_camera(main_camera);
     /*=========================== Add Objects ===========================*/
     // init tree nodes
-    this->my_tree.add_node(0,up,Node(glm::vec3(0,1,0)));
-    this->my_tree.add_node(1,right,Node(glm::vec3(0.4,1.2,0.1)));
-    this->my_tree.add_node(1,up,Node(glm::vec3(-0.25,1.9,-0.15)));
-    this->my_tree.add_node(1,left,Node(glm::vec3(-0.5,1.3,0.2)));
-    this->my_tree.add_node(4,up,Node(glm::vec3(-0.5,1.8,0.5)));
+    my_tree.height = 0.0f;
+    my_tree.offset = 0.2f;
+    my_tree.clear();
+    this->my_tree.add_node(0, up, Node(glm::vec3(0, 1 - this->my_tree.height, 0)));
+    this->my_tree.add_node(1, right, Node(glm::vec3(0.4, 1.2 - this->my_tree.height, 0.1)));
+    this->my_tree.add_node(1, up, Node(glm::vec3(-0.25, 1.9 - this->my_tree.height, -0.15)));
+    this->my_tree.add_node(1, left, Node(glm::vec3(-0.5, 1.3 - this->my_tree.height, 0.2)));
+    this->my_tree.add_node(4, up, Node(glm::vec3(-0.5, 1.8 - this->my_tree.height, 0.5)));
     std::vector<glm::vec3> nodes_pos = this->my_tree.generate_points();
     std::vector<GLuint> connections = this->my_tree.generate_connections();
-    tree_segment_num_2x = connections.size();
-    VertexArrayObject nodes_vao(true);
-    VertexBufferObject nodes_vbo(nodes_pos, GL_STATIC_DRAW);
-    ElementBufferObject nodes_ebo(connections, GL_STATIC_DRAW);
-    //pos
-    bind_vertex_attribute(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *) nullptr);
-    nodes_vao.attach_vbo(nodes_vbo.id());
-    nodes_vao.attach_ebo(nodes_ebo.id());
-    this->add_vao("tree_nodes", nodes_vao);
-    ZWEngine::disable_vao();
-    // init tree surfaces
     my_tree.generate_surfaces();
-//    my_tree.subdivision();
-    my_tree.subdivision();
-    my_tree.subdivision();
-    my_tree.subdivision();
-    my_tree.subdivision();
-//    my_tree.subdivision();
-    my_tree.subdivision();
     std::vector<glm::vec3> position_list = this->my_tree.get_point_pos();
-    std::vector<GLuint> idx= this->my_tree.get_surface_idx();
+    std::vector<GLuint> idx = this->my_tree.get_surface_idx();
     VertexArrayObject surfaces_vao(true);
-    VertexBufferObject surfaces_vbo(position_list,GL_STATIC_DRAW);
-    ElementBufferObject surfaces_ebo(idx,GL_STATIC_DRAW);
+    VertexBufferObject surfaces_vbo(position_list, GL_STATIC_DRAW);
+    ElementBufferObject surfaces_ebo(idx, GL_STATIC_DRAW);
     //pos
-    bind_vertex_attribute(1,3,GL_FLOAT,GL_FALSE,3*sizeof(GLfloat),(void *) nullptr);
+    bind_vertex_attribute(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *) nullptr);
     surfaces_vao.attach_vbo(surfaces_vbo.id());
     surfaces_vao.attach_ebo(surfaces_ebo.id());
     surfaces_vao.set_elements_num(idx.size());
-    this->add_vao("surfaces",surfaces_vao);
+    surfaces_vao.activate();
+    this->add_vao("surfaces", surfaces_vao);
     ZWEngine::disable_vao();
 
+//    // init tree surfaces
+//    my_tree.generate_surfaces();
+//    my_tree.subdivision();
+//    my_tree.subdivision();
+//    my_tree.subdivision();
+//    my_tree.subdivision();
+//    my_tree.subdivision();
 }
 
 void ZWEngine::render_ui() {
@@ -86,11 +79,35 @@ void ZWEngine::render_ui() {
 
     ImGui::SliderFloat("obj angle: ", &obj_angle, -180.0f, 180.0f);
     ImGui::SliderFloat2("camera angle", &this->main_camera.get_pitch_yaw()[0], -180, 180);
+    ImGui::SliderFloat("width: ",&this->my_tree.offset,0.1f,0.4f);
+    ImGui::SliderFloat("angle: ",&this->my_tree.height,0.0f,0.5f);
+    if(ImGui::Button("Generate")){
+        this->regenerate();
+    }if(ImGui::Button("Subdivision")){
+//        this->my_tree.clear();
+        this->my_tree.subdivision();
+        std::vector<glm::vec3> position_list = this->my_tree.get_point_pos();
+        std::vector<GLuint> idx = this->my_tree.get_surface_idx();
+        VertexArrayObject surfaces_vao(true);
+        VertexBufferObject surfaces_vbo(position_list, GL_STATIC_DRAW);
+        ElementBufferObject surfaces_ebo(idx, GL_STATIC_DRAW);
+        //pos
+        bind_vertex_attribute(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *) nullptr);
+        surfaces_vao.attach_vbo(surfaces_vbo.id());
+        surfaces_vao.attach_ebo(surfaces_ebo.id());
+        surfaces_vao.set_elements_num(idx.size());
+        surfaces_vao.activate();
+        this->vao_map.clear();
+        this->add_vao("surfaces", surfaces_vao);
+        ZWEngine::disable_vao();
+    }
     ImGui::End();
     ImGui::Render();
 }
 
 void ZWEngine::render_world() {
+    shader_program->use_shader_program();
+
     // clear buffers
     glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -107,17 +124,14 @@ void ZWEngine::render_world() {
     if (!shader_program->set_uniform_mat4fv(4, proj)) {
         this->uniform_failed_id = 4;
     }
-//    this->activate_vao("tree_nodes");
-//    glDrawElements(GL_LINES,tree_segment_num_2x , GL_UNSIGNED_INT, 0);
-//    ZWEngine::disable_vao();
     this->activate_vao("surfaces");
-    int a = this->vao_map["surfaces"].get_elements_num();
-    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-    glDrawElements(GL_TRIANGLES,a,GL_UNSIGNED_INT,0);
-    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glDrawElements(GL_TRIANGLES,this->vao_map["surfaces"].get_elements_num() , GL_UNSIGNED_INT, 0);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     ZWEngine::disable_vao();
+
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
 }
 
 void ZWEngine::process_input() {
